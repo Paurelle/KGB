@@ -1,5 +1,8 @@
 
 <?php
+    $linkNavHome = "index.php";
+    $linkNavLogin = "login.php";
+    $linkLogo = "index.php";
     require_once 'layout/header.php';
 ?>
 

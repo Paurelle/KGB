@@ -1,0 +1,113 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    position: relative;
+    margin: 140px 30px 30px 30px;
+    padding: 70px 0 70px 0;
+    box-shadow: 0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%);
+    background: white;
+    border-radius: 6px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1140px;
+    padding: 0px 15px 0 15px;
+    margin: 0 auto 0 auto;
+    text-align: center;
+}
+
+.title {
+    font-weight: 700;
+}
+
+.title h1 {
+    margin: 30px 0 25px 0;
+    font-size: 3.3rem;
+}
+
+.grid-panel {
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    grid-template-rows: 140px 140px 140px 140px; 
+    gap: 20px 20px; 
+    grid-template-areas: 
+      "agent agent pays ."
+      "contact contact specialite statut"
+      "cible cible type_mission planque"
+      "admin admin mission mission"; 
+    margin: 30px 0;
+  }
+  .grid-panel-item1 { grid-area: agent; }
+  .grid-panel-item2 { grid-area: pays; }
+  .grid-panel-item3 { grid-area: contact; }
+  .grid-panel-item4 { grid-area: specialite; }
+  .grid-panel-item5 { grid-area: statut; }
+  .grid-panel-item6 { grid-area: cible; }
+  .grid-panel-item7 { grid-area: type_mission; }
+  .grid-panel-item8 { grid-area: planque; }
+  .grid-panel-item9 { grid-area: admin; }
+  .grid-panel-item10 { grid-area: mission; }
+
+.grid-panel-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 1px black solid;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+
+.grid-panel-items:hover {
+    background: black;
+    color: white;
+}
+
+
+
+
+@media (max-width: 600px) {
+
+    main {
+        position: relative;
+        margin: 140px 15px 30px 15px;
+        box-shadow: 0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%);
+    }
+
+    .grid-panel {
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        grid-template-rows: 70px 70px 70px 70px 70px 70px 70px 70px; 
+        gap: 20px 20px; 
+        grid-template-areas: 
+          "agent agent" 
+          "contact contact"
+          "cible cible"
+          "admin admin"
+          "mission mission"
+          "pays specialite"
+          "statut type_mission"
+          "planque ."; 
+        margin: 30px 0;
+      }
+
+      .grid-panel-item1 { grid-area: agent; }
+      .grid-panel-item2 { grid-area: pays; }
+      .grid-panel-item3 { grid-area: contact; }
+      .grid-panel-item4 { grid-area: specialite; }
+      .grid-panel-item5 { grid-area: statut; }
+      .grid-panel-item6 { grid-area: cible; }
+      .grid-panel-item7 { grid-area: type_mission; }
+      .grid-panel-item8 { grid-area: planque; }
+      .grid-panel-item9 { grid-area: admin; }
+      .grid-panel-item10 { grid-area: mission; }
+
+}
