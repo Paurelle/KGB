@@ -1,0 +1,59 @@
+
+
+
+
+/* Boîte Popup */
+      /* Le Modal (l'arrière-plan) */
+      .modal {
+        display: none; /* Masqué par défaut */
+        position: fixed; /* Rester dans la place */
+        z-index: 8888; /* S'asseoir en haut */
+        left: 0;
+        top: 0;
+        width: 100%; /* Largeur complète */
+        height: 100%; /* Hauteur complète */
+        overflow: auto; /* Activer défilement si nécessaire */
+        background-color: rgb(0,0,0); /* Couleur de plan */
+        background-color: rgba(0,0,0,0.4); /*  w/ opacité noir*/
+        }
+        /* Contenu Modal/Boîte*/
+        .modal-wrapper {
+        background-color: #fefefe;
+        margin: 10vh auto; /* 15% d'en haut et centré */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 60%; /* Pouvait être plus ou moins, dépend de la taille de l'écran  */
+        }
+        
+        .modal-content {
+          text-align: left;
+        }
+        
+        h2, p {
+        margin: 0 0 20px;
+        font-weight: 400;
+        }
+        /* Le bouton Fermer */
+        .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+        }
+        
+
+        @media (min-width: 1366px) {
+          .modal-wrapper {
+          background-color: #fefefe;
+          margin: 10vh auto; /* 15% d'en haut et centré */
+          padding: 20px;
+          border: 1px solid #888;
+          width: 30%; /* Pouvait être plus ou moins, dépend de la taille de l'écran */
+          }
+        }

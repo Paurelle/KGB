@@ -16,10 +16,10 @@ main {
 .container {
     display: flex;
     flex-direction: column;
-    max-width: 1140px;
+    max-width: 1148px;
     padding: 0px 15px 0 15px;
     margin: 0 auto 0 auto;
-    text-align: center;
+    
 }
 
 .title {
@@ -29,6 +29,7 @@ main {
 .title h1 {
     margin: 30px 0 25px 0;
     font-size: 3.3rem;
+    text-align: center;
 }
 
 .cards {
@@ -40,6 +41,7 @@ main {
     display: flex;
     flex-direction: column;
     width: 255px;
+    height: 300px;
     margin: 30px 15px 30px 15px;
     border-radius: 6px;
     background: rgb(216, 216, 216);
@@ -47,6 +49,33 @@ main {
     box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
 }
 
+.card .content {
+    padding: 0 15px;
+    height: 100%;
+}
+
+h2 {
+    text-align: center;
+    padding-top: 10px;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+.btn-modal {
+    text-align: center;
+}
+
+.btn-modal button {
+    width: 100%;
+    height: 100%;
+    background: white;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 1px black solid;
+}
 
 @media (max-width: 600px) {
 

@@ -3,8 +3,14 @@
     $linkNavHome = "index.php";
     $linkNavLogin = "login.php";
     $linkLogo = "index.php";
+    $linkNavAdminPanel = "adminPanel.php";
     require_once 'layout/header.php';
-    
+
+    require_once 'models/helpers/session_helper.php';
+
+    if (isset($_SESSION['adminId'])) {
+        echo "vous êtes déjà connecter";
+    } else {
 ?>
 
 <!DOCTYPE html>
@@ -26,9 +32,11 @@
         <div class="container">
             <section class="title">
                 <h1>Admin Login</h1>
+                <?php flash('login'); ?>
             </section>
             <section class="form-login">  
-                <form action="" method="POST">
+                <form action="controllers/Admins.php" method="POST">
+                    <input type="hidden" name="type" value="login">
                     <div class="wrapper">
                         <div class="form-box">
                             <div class="form-input">
@@ -60,6 +68,7 @@
                     </div>
                 </form>
             </section>
+            <a href="registerAdmin.php">register</a>
         </div>
     </main>
 
@@ -72,7 +81,8 @@
 </body>
 </html>
 
-
+<?php
+}
 
 
 

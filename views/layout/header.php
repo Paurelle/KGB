@@ -1,6 +1,7 @@
 
 <?php
     ob_start();
+    session_start();
 ?>
 
 <header id="header">
@@ -11,8 +12,14 @@
                 <span class="hamburger"></span>
             </button>
             <ul class="menu" role="menu">
-                <li><a href="<?php echo $linkNavHome ?>">Home</a></li>
-                <li><a href="<?php echo $linkNavLogin ?>">Admin Login</a></li>
+                <?php if (!isset($_SESSION['adminId'])) : ?>
+                    <li><a href="<?php echo $linkNavHome ?>">Home</a></li>
+                    <li><a href="<?php echo $linkNavLogin ?>">Admin Login</a></li>
+                <?php else : ?>
+                    <li><a href="<?php echo $linkNavHome ?>">Home</a></li>
+                    <li><a href="<?php echo $linkNavAdminPanel ?>">Admin panel</a></li>
+                    <li><a href="controllers/Admins.php?q=logout">Logout</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </div>
