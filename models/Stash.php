@@ -7,7 +7,7 @@ class Stash {
     private string $address;
     private string $type;
     private string $country;
-
+/*
     public function __construct($stashId, $code, $address, $type, $country)
     {
         $this->stashId = $stashId;
@@ -16,7 +16,7 @@ class Stash {
         $this->type = $type;
         $this->country = $country;
     }
-
+*/
     // Getters
     public function getStashId() {
         return $this->stashId;

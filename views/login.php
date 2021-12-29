@@ -68,7 +68,6 @@
                     </div>
                 </form>
             </section>
-            <a href="registerAdmin.php">register</a>
         </div>
     </main>
 

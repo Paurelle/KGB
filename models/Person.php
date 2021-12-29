@@ -9,16 +9,6 @@ class Person {
     private string $country;
     private string $nationality;
     
-    public function __construct($id = null, $name, $lastname, $birthDate, $country, $nationality)
-    {
-        $this->id = $id;
-        $this->name = $name;
-        $this->lastname = $lastname;
-        $this->birthDate = $birthDate;
-        $this->country = $country;
-        $this->nationality = $nationality;
-    }
-    
     // Getters
     public function getId() {
         return $this->id;

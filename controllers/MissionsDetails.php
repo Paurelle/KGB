@@ -26,13 +26,13 @@ class MissionsDetails extends DataBase{
         $stmt->execute();
 
         while($row = $stmt->fetch()) {
-            $stash = new Stash(
-                $row['id_planque'],
-                $row['code'],
-                $row['adresse'],
-                $row['type'],
-                $row['pays']
-            );
+            $stash = new Stash();
+            $stash->setStashId($row['id_planque']);
+            $stash->setCode($row['code']);
+            $stash->setAddress($row['adresse']);
+            $stash->setType($row['type']);
+            $stash->setCountry($row['pays']);
+            
             $result[] = $stash;
         }
         return $result;
@@ -41,9 +41,11 @@ class MissionsDetails extends DataBase{
     public function getDetailsAgents($missionId) {
         $result = [];
 
-        $stmt1 = $this->getBdd()->prepare(
+        $bdd = new DataBase();
+
+        $stmt1 = $bdd->getBdd()->prepare(
         'SELECT missions.id_mission, 
-		agents.id_agent as agentId, nom, prenom, date_naissance, pays, nationalite,
+        agents.id_agent as agentId, nom, prenom, date_naissance, pays, nationalite,
         code_identification
         FROM `missions` 
         -- agent
@@ -53,7 +55,7 @@ class MissionsDetails extends DataBase{
         JOIN pays ON pays.id_pays = agents.id_pays
         WHERE missions.id_mission = :missionId');
 
-        $stmt2 = $this->getBdd()->prepare( 
+        $stmt2 = $bdd->getBdd()->prepare( 
         'SELECT missions.id_mission, specialite
         FROM `missions` 
         -- agent
@@ -72,23 +74,25 @@ class MissionsDetails extends DataBase{
             $stmt2 -> bindParam(':missionId', $missionId);
             $stmt2 -> bindParam(':agentId', $row1['agentId']);
             $stmt2->execute();
+
             while($rows2 = $stmt2->fetch()) {
                 $specialitys .= '<li>'.$rows2['specialite'].'</li>';
             }
-            $agent = new Agent(
-                $row1['agentId'],
-                $row1['nom'],
-                $row1['prenom'],
-                $row1['date_naissance'],
-                $row1['pays'],
-                $row1['nationalite'],
-                $specialitys,
-                $row1['code_identification']
-            );
+            $agent = new Agent();
+            $agent->setId($row1['agentId']);
+            $agent->setName($row1['nom']);
+            $agent->setLastname($row1['prenom']);
+            $agent->setBirthDate($row1['date_naissance']);
+            $agent->setCountryId($row1['pays']);
+            $agent->setNationality($row1['nationalite']);
+            $agent->setIdSpeciality($specialitys);
+            $agent->setCode($row1['code_identification']);
+
             $result[] = $agent;
         }
         return $result;
     }
+
 
     public function getDetailsContacts($missionId) {
         $result = [];
@@ -108,15 +112,15 @@ class MissionsDetails extends DataBase{
         $stmt1->execute();
 
         while($row1 = $stmt1->fetch()) {
-            $contact = new Contact(
-                $row1['contactId'],
-                $row1['nom'],
-                $row1['prenom'],
-                $row1['date_naissance'],
-                $row1['pays'],
-                $row1['nationalite'],
-                $row1['nom_code']
-            );
+            $contact = new Contact();
+            $contact->setId($row1['contactId']);
+            $contact->setName($row1['nom']);
+            $contact->setLastname($row1['prenom']);
+            $contact->setBirthDate($row1['date_naissance']);
+            $contact->setCountryId($row1['pays']);
+            $contact->setNationality($row1['nationalite']);
+            $contact->setCodeName($row1['nom_code']);
+           
             $result[] = $contact;
         }
         return $result;
@@ -140,15 +144,15 @@ class MissionsDetails extends DataBase{
         $stmt1->execute();
 
         while($row1 = $stmt1->fetch()) {
-            $target = new Target(
-                $row1['cibleId'],
-                $row1['nom'],
-                $row1['prenom'],
-                $row1['date_naissance'],
-                $row1['pays'],
-                $row1['nationalite'],
-                $row1['nom_code']
-            );
+            $target = new Target();
+            $target->setId($row1['cibleId']);
+            $target->setName($row1['nom']);
+            $target->setLastname($row1['prenom']);
+            $target->setBirthDate($row1['date_naissance']);
+            $target->setCountryId($row1['pays']);
+            $target->setNationality($row1['nationalite']);
+            $target->setCodeName($row1['nom_code']);
+           
             $result[] = $target;
         }
         return $result;

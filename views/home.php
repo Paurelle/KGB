@@ -9,7 +9,12 @@
     require_once 'controllers/Missions.php';
     $missionsControllers = new Missions();
     $missions = $missionsControllers->getAll();
+/*
+    require_once 'controllers/MissionsDetails.php';
+    $missionsDetailsControllers = new MissionsDetails();
+    */
 
+    //require_once 'models/Agent.php';
     require_once 'controllers/MissionsDetails.php';
     $missionsDetailsControllers = new MissionsDetails();
     
@@ -87,8 +92,10 @@
                                             /* Agent */
                                             $missionsDetailsAgents = $missionsDetailsControllers->getDetailsAgents($mission->getMissionId());
                                             foreach ($missionsDetailsAgents as $missionsDetailsAgent) {
+                                                
                                             ?>
                                                 <ul>
+                                                    <li>id : <?= $missionsDetailsAgent->getId(); ?></li>
                                                     <li>nom : <?= $missionsDetailsAgent->getName(); ?></li>
                                                     <li>prénom : <?= $missionsDetailsAgent->getLastname(); ?></li>
                                                     <li>né en : <?= $missionsDetailsAgent->getCountry(); ?></li>
@@ -122,7 +129,7 @@
                                             ?>
                                             <h2>Cible</h2>
                                             <?php
-                                            /* Cible */
+                                            /* Cible */ 
                                             $missionsDetailsCibles = $missionsDetailsControllers->getDetailsCibles($mission->getMissionId());
                                             foreach ($missionsDetailsCibles as $missionsDetailsCible) {
                                             ?>
