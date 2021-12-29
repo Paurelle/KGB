@@ -50,7 +50,7 @@
                             <input type="hidden" name="type" value="modify">
                             <h2>Modify Administrator</h2>
                             <div class="form" >
-                                <label for="AdminSelectModify">Modify an missionType:</label>
+                                <label for="AdminSelectModify">Modify an admin:</label>
                                 <select name="modifyAdmin" id="AdminSelectModify" class="admin">
                                     <option value="default"></option>
                                     <?php 
@@ -91,7 +91,6 @@
                             <div class="form" >
                                 <label for="adminSelectDelete">Delete an admin:</label>
                                 <select name="deleteAdmin" id="adminSelectDelete" class="adminDelete">
-                                    <option value="default"></option>
                                     <?php 
                                     foreach ($adminDetails as $adminDetail) {
                                     ?>

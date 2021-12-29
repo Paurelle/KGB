@@ -64,7 +64,6 @@
                                 <div class="form">
                                     <label for="specialitySelectDelete">Delete an speciality:</label>
                                     <select name="deleteSpeciality" id="specialitySelectDelete">
-                                        <option value="default"></option>
                                         <?php 
                                         foreach ($specialitysDetails as $specialitysDetail) {
                                         ?>

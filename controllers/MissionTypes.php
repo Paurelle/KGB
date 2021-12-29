@@ -58,12 +58,7 @@ class MissionTypes {
             flash("infoForm", "Une erreur c'est produit !");
             redirect("../adminPanel.php");
         }
-
-        if ($data['missionType'] == "default") {
-            flash("infoForm", "vous ne pouvez pas modifier la valeur par default");
-            redirect("../adminPanel.php");
-        }
-
+        
         if($this->missionTypeModel->modify($data)){
             flash("infoForm", "Le type de mission ". $data['missionType'] ." a bien êtait modifier", 'form-message form-message-green');
             redirect("../adminPanel.php");

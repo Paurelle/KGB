@@ -1,7 +1,19 @@
 
 <?php
     ob_start();
+
+    require_once 'models/Contact.php';
+    $contact = new Contact();
+
+    require_once 'models/Country.php';
+    $country = new Country();
 ?>
+
+                <?php 
+                    $contactDetails = $contact->getAllContacts(); 
+                    $countryDetails = $country->getAllCountries(); 
+                    //var_dump($countrysDetails);
+                ?>
 
                 <button class="grid-panel-items grid-panel-item3"  data-modal="modal3">
                     Contact
@@ -15,48 +27,99 @@
                         <div class="contact-form">
                         <a class="close">&times;</a>
                         <!-- form -->
-                        <form action="controllers/CountryAdminPanel.php" method="POST" id="form7" class="formX">
+                        <form action="controllers/Contacts.php" method="POST" id="form7" class="formX">
                             <input type="hidden" name="type" value="add">
-                            <h2>Contact</h2>
-                            <div class="form" >
-                                <p>Add</p>
-                                <label for="country">Country</label>
-                                <input type="text" name="country" id="country">
+                            <h2>Add contact</h2>
+                            <div class="form">
+                                <label for="addNameContact">Name</label>
+                                <input type="text" name="addNameContact" id="addNameContact">
 
-                                <label for="nationality">Nationality</label>
-                                <input type="text" name="nationality" id="nationality">
-                                
+                                <label for="addLastnameContact">Lastname</label>
+                                <input type="text" name="addLastnameContact" id="addLastnameContact">
+
+                                <label for="addBirthDateContact">Birth date</label>
+                                <input type="date" name="addBirthDateContact" id="addBirthDateContact">
+
+                                <label for="addCountryContact">Country</label>
+                                <select name="addCountryContact" id="addCountryContact">
+                                    <option value="default"></option>
+                                    <?php 
+                                    foreach ($countryDetails as $countryDetail) {
+                                    ?>
+                                        <option value="<?=$countryDetail->id_pays?>"><?=$countryDetail->pays?></option>
+                                    <?php 
+                                    }
+                                    ?>
+                                </select>
+                                <br>
+                                <label for="addCodeContact">Nom de code</label>
+                                <input type="text" name="addCodeContact" id="addCodeContact">
                             </div>
                             <button type="submit">Envoyer</button>
                         </form>
                         <!-- form -->
-                        <form action="adminPanel.php" id="form8" class="formX">
-                            <h2>Contact</h2>
+                        <script src="views/js/modifyModal/contactModifyForm.js"></script>
+                        <form action="controllers/Contacts.php" method="POST" id="form8" class="formX">
+                            <input type="hidden" name="type" value="modify">
+                            <h2>Modify contact</h2>
                             <div class="form" >
-                                <p>Modify</p>
-                                <label for="pays">Pays</label>
-                                <input type="text" name="pays" id="pays">
-                                <label for="name">Name</label>
-                                <input type="text" name="name" id="name" placeholder="name before">
-                                <label for="lastname">Lastname</label>
-                                <input type="text" name="lastname" id="lastname" placeholder="lastname before">
-                                <label for="birthDate">Birth date</label>
-                                <input type="text" name="birthDate" id="birthDate" placeholder="birth date before">
-                                <label for="code">Code identification</label>
-                                <input type="text" name="code" id="code" placeholder="code identification before">
+                                <label for="contactSelectModify">Modify an contact:</label>
+                                <select name="contactSelectModify" id="contactSelectModify" class="contact">
+                                    <option value="default"></option>
+                                    <?php 
+                                    foreach ($contactDetails as $contactDetail) {
+                                    ?>
+                                        <option value="<?=$contactDetail->id_contact?>"><?=$contactDetail->nom?></option>
+                                    <?php 
+                                    }
+                                    ?>
+                                </select><br>
+
+                                <div class="contactModify" style="display: none">
+                                    <label for="modifyNameContact">Name</label>
+                                    <input type="text" name="modifyNameContact" id="modifyNameContact">
+
+                                    <label for="modifyLastnameContact">Lastname</label>
+                                    <input type="text" name="modifyLastnameContact" id="modifyLastnameContact">
+
+                                    <label for="modifyBirthDateContact">Birth date</label>
+                                    <input type="date" name="modifyBirthDateContact" id="modifyBirthDateContact">
+
+                                    <label for="modifyCountryContact">Country</label>
+                                    <select name="modifyCountryContact" id="modifyCountryContact">
+                                        <?php 
+                                        foreach ($countryDetails as $countryDetail) {
+                                        ?>
+                                            <option id="<?="modifyCountryContact_".$countryDetail->pays?>" value="<?=$countryDetail->id_pays?>"><?=$countryDetail->pays?></option>
+                                        <?php 
+                                        }
+                                        ?>
+                                    </select>
+                                    <br>
+                                    <label for="modifyCodeContact">Nom de code</label>
+                                    <input type="text" name="modifyCodeContact" id="modifyCodeContact">
+
+                                    <button type="submit">Envoyer</button>
+
+                                </div>
                             </div>
-                            <button type="submit" href="adminPanel.php">Envoyer</button>
                         </form>
                         <!-- form -->
-                        <form action="adminPanel.php" id="form9" class="formX">
-                            <h2>Contact</h2>
+                        <form action="controllers/Contacts.php" method="POST"  id="form9" class="formX">
+                            <input type="hidden" name="type" value="delete">
+                            <h2>Delete contact</h2>
                             <div class="form" >
-                                <p>Delete</p>
-                                <label for="agent-select">Delete an agent:</label>
-                                <select name="agent" id="agent-select">
-                                    <option value="">--Agents--</option>
+                                <label for="deleteContact">Delete an contact:</label>
+                                <select name="deleteContact" id="deleteContact">
+                                    <?php 
+                                    foreach ($contactDetails as $contactDetail) {
+                                    ?>
+                                        <option value="<?=$contactDetail->id_contact?>"><?=$contactDetail->nom?></option>
+                                    <?php 
+                                    }
+                                    ?>
                                 </select>
-                            </div>
+                            </div><br>
                             <button type="submit" href="adminPanel.php">Envoyer</button>
                         </form>
                         </div>

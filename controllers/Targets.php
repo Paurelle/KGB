@@ -1,14 +1,14 @@
 <?php 
 
-require_once '../models/Agent.php';
+require_once '../models/Target.php';
 require_once '../models/helpers/session_helper.php';
 
-class Agents {
+class Targets {
 
-    private $agentModel;
+    private $targetModel;
 
     public function __construct(){
-        $this->agentModel = new Agent;
+        $this->targetModel = new Target;
     }
 
     public function register(){
@@ -17,16 +17,15 @@ class Agents {
         
         // Init data
         $data = [
-            'name' => trim($_POST['addNameAgent']),
-            'lastname' => trim($_POST['addLastnameAgent']),
-            'birthDate' => trim($_POST['addBirthDateAgent']),
-            'country' => trim($_POST['addCountryAgent']),
-            'code' => trim($_POST['addCodeAgent']),
-            'speciality' => $_POST['addSpecialityAgent']
+            'name' => trim($_POST['addNameTarget']),
+            'lastname' => trim($_POST['addLastnameTarget']),
+            'birthDate' => trim($_POST['addBirthDateTarget']),
+            'country' => trim($_POST['addCountryTarget']),
+            'codeName' => trim($_POST['addCodeTarget'])
         ];
 
         if (empty($data['name']) || empty($data['lastname']) || 
-        empty($data['birthDate']) || empty($data['country']) || empty($data['code'])) {
+        empty($data['birthDate']) || empty($data['country']) || empty($data['codeName'])) {
             flash("infoForm", "Please complete all entries !");
             redirect("../adminPanel.php");
         }
@@ -41,23 +40,18 @@ class Agents {
             redirect("../adminPanel.php");
         }
 
-        if(!preg_match("/^[0-9]*$/", $data['code'])){
-            flash("infoForm", "Invalid code");
+        if(!preg_match("/^[0-9a-zA-Zéèçàê ]*$/", $data['codeName'])){
+            flash("infoForm", "Invalid codeName");
             redirect("../adminPanel.php");
         }
 
-        if($data['speciality'] == null){
-            flash("infoForm", "Please select 1 specialty");
+        if($this->targetModel->findTargetByCodeName($data['codeName'])){
+            flash("infoForm", $data['codeName']." déjà pris");
             redirect("../adminPanel.php");
         }
 
-        if($this->agentModel->findAgentByCode($data['code'])){
-            flash("infoForm", $data['code']." déjà pris");
-            redirect("../adminPanel.php");
-        }
-
-        if($this->agentModel->register($data)){
-            flash("infoForm", "L'agent ". $data['name'] ." a bien êtait créé !", 'form-message form-message-green');
+        if($this->targetModel->register($data)){
+            flash("infoForm", "La cible ". $data['name'] ." a bien êtait créé !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -70,17 +64,16 @@ class Agents {
 
         // Init data
         $data = [
-            'agent' => trim($_POST['agentSelectModify']),
-            'name' => trim($_POST['modifyNameAgent']),
-            'lastname' => trim($_POST['modifyLastnameAgent']),
-            'birthDate' => trim($_POST['modifyBirthDateAgent']),
-            'country' => trim($_POST['modifyCountryAgent']),
-            'code' => trim($_POST['modifyCodeAgent']),
-            'speciality' => $_POST['mofidySpecialityAgent']
+            'target' => trim($_POST['targetSelectModify']),
+            'name' => trim($_POST['modifyNameTarget']),
+            'lastname' => trim($_POST['modifyLastnameTarget']),
+            'birthDate' => trim($_POST['modifyBirthDateTarget']),
+            'country' => trim($_POST['modifyCountryTarget']),
+            'codeName' => trim($_POST['modifyCodeTarget'])
         ];
 
-        if (empty($data['agent']) || empty($data['name']) || empty($data['lastname']) || 
-        empty($data['birthDate']) || empty($data['country']) || empty($data['code'])) {
+        if (empty($data['target']) || empty($data['name']) || empty($data['lastname']) || 
+        empty($data['birthDate']) || empty($data['country']) || empty($data['codeName'])) {
             flash("infoForm", "Please complete all entries !");
             redirect("../adminPanel.php");
         }
@@ -95,23 +88,18 @@ class Agents {
             redirect("../adminPanel.php");
         }
 
-        if(!preg_match("/^[0-9]*$/", $data['code'])){
-            flash("infoForm", "Invalid code");
+        if(!preg_match("/^[0-9a-zA-Zéèçàê ]*$/", $data['codeName'])){
+            flash("infoForm", "Invalid codeName");
             redirect("../adminPanel.php");
         }
 
-        if($data['speciality'] == null){
-            flash("infoForm", "Please select 1 specialty");
-            redirect("../adminPanel.php");
-        }
-
-        if ($data['agent'] == "default") {
+        if ($data['target'] == "default") {
             flash("infoForm", "vous ne pouvez pas modifier la valeur par default");
             redirect("../adminPanel.php");
         }
 
-        if($this->agentModel->modify($data)){
-            flash("infoForm", "L'agent ". $data['name'] ." a bien êtait modifier", 'form-message form-message-green');
+        if($this->targetModel->modify($data)){
+            flash("infoForm", "La cible ". $data['name'] ." a bien êtait modifier", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -125,28 +113,28 @@ class Agents {
 
         // Init data
         $data = [
-            'agent' => trim($_POST['deleteAgent'])
+            'target' => trim($_POST['deleteTarget'])
         ];
 
-        if (empty($data['agent'])) {
+        if (empty($data['target'])) {
             flash("infoForm", "Une erreur c'est produit !");
             redirect("../adminPanel.php");
         }
 
-        if ($data['agent'] == "default") {
+        if ($data['target'] == "default") {
             flash("infoForm", "vous ne pouvez pas suprimer la valeur par default");
             redirect("../adminPanel.php");
         }
 
-        $agentInfo = $this->agentModel->getSpecificAgent($data['agent']);
+        $targetInfo = $this->targetModel->getSpecificTarget($data['target']);
 
-        if ($this->agentModel->findAgentInOtherTable($data['agent'])) {
-            flash("infoForm",$agentInfo->{'nom'}." ne peut pas se faire surpimer car une autre table contien cette agent");
+        if ($this->targetModel->findTargetInOtherTable($data['target'])) {
+            flash("infoForm",$targetInfo->{'nom'}." ne peut pas se faire surpimer car une autre table contien cette target");
             redirect("../adminPanel.php");
         }
 
-        if($this->agentModel->delete($data)){
-            flash("infoForm", "L'agent ". $agentInfo->{'nom'} ." a bien êtait suprimer", 'form-message form-message-green');
+        if($this->targetModel->delete($data)){
+            flash("infoForm", "La cible ". $targetInfo->{'nom'} ." a bien êtait suprimer", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -158,7 +146,7 @@ class Agents {
 
 // Ensure that user is sending a POST request.
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $init = new Agents;
+    $init = new Targets;
     switch ($_POST['type']) {
         case 'add':
             $init->register();

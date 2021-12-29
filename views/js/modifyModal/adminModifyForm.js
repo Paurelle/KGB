@@ -3,6 +3,12 @@ $(document).ready(function(){
     $("select.admin").change(function(){
        select = $(this).children("option:selected").val();
 
+       if (select == "default") {
+         document.querySelector('.adminModify').style.display = "none";
+      } else {
+         document.querySelector('.adminModify').style.display = "block";
+      }
+
       $.ajax({
          type:"POST", 	        
          url:"models/Admin.php",  
@@ -25,10 +31,5 @@ $(document).ready(function(){
     document.getElementsByName('emailModify')[0].placeholder=email;
     document.getElementsByName('emailModify')[0].value = email;
 
-    if (select == "default") {
-       document.querySelector('.adminModify').style.display = "none";
-    } else {
-       document.querySelector('.adminModify').style.display = "block";
-    }
  }
  

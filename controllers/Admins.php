@@ -89,11 +89,6 @@ class Admins {
             redirect("../adminPanel.php");
         }
 
-        if ($data['Admin'] == "default") {
-            flash("infoForm", "vous ne pouvez pas suprimer la valeur par default");
-            redirect("../adminPanel.php");
-        }
-
         if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['name'])){
             flash("infoForm", "Invalid Country");
             redirect("../adminPanel.php");

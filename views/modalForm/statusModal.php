@@ -64,7 +64,6 @@
                                 <div class="form">
                                     <label for="statusSelectDelete">Delete an status:</label>
                                     <select name="deleteStatus" id="statusSelectDelete" class="statusDelete">
-                                        <option value="default"></option>
                                         <?php 
                                         foreach ($statusDetails as $statusDetail) {
                                         ?>

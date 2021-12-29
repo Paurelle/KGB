@@ -81,11 +81,6 @@ class Statutes {
             redirect("../adminPanel.php");
         }
 
-        if ($data['status'] == "default") {
-            flash("infoForm", "vous ne pouvez pas suprimer la valeur par default");
-            redirect("../adminPanel.php");
-        }
-
         $statusInfo = $this->statusModel->getSpecificStatus($data['status']);
         $statusId = $specialityInfo->{'id_statut'};
 

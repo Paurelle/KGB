@@ -85,11 +85,6 @@
                 flash("infoForm", "Une erreur c'est produit !");
                 redirect("../adminPanel.php");
             }
-    
-            if ($data['speciality'] == "default") {
-                flash("infoForm", "vous ne pouvez pas suprimer la valeur par default");
-                redirect("../adminPanel.php");
-            }
 
             $specialityInfo = $this->specialityModel->getSpecificSpecialty($data['speciality']);
             $specialityId = $specialityInfo->{'id_specialite'};

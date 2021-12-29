@@ -64,7 +64,6 @@
                                 <div class="form">
                                     <label for="missionTypeSelectDelete">Delete an missionType:</label>
                                     <select name="deleteMissionType" id="missionTypeSelectDelete" class="missionTypeDelete">
-                                        <option value="default"></option>
                                         <?php 
                                         foreach ($missionTypeDetails as $missionTypeDetail) {
                                         ?>

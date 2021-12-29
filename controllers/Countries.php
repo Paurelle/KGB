@@ -93,12 +93,7 @@ class Countries {
             flash("infoForm", "Une erreur c'est produit !");
             redirect("../adminPanel.php");
         }
-
-        if ($data['country'] == "default") {
-            flash("infoForm", "vous ne pouvez pas suprimer la valeur par default");
-            redirect("../adminPanel.php");
-        }
-
+        
         $countryInfo = $this->countryModel->getSpecificCountry($data['country']);
         $countryId = $countryInfo->{'id_pays'};
 

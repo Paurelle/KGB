@@ -3,6 +3,12 @@ $(document).ready(function(){
     $("select.country").change(function(){
        select = $(this).children("option:selected").val();
 
+       if (select == "default") {
+         document.querySelector('.countryModify').style.display = "none";
+      } else {
+         document.querySelector('.countryModify').style.display = "block";
+      }
+
       $.ajax({
          type:"POST", 	        
          url:"models/Country.php",  
@@ -21,10 +27,6 @@ $(document).ready(function(){
 
     document.getElementsByName('nationalityModify')[0].placeholder=nationality;
     document.getElementsByName('nationalityModify')[0].value = nationality;
-    if (select == "default") {
-       document.querySelector('.countryModify').style.display = "none";
-    } else {
-       document.querySelector('.countryModify').style.display = "block";
-    }
+    
  }
  

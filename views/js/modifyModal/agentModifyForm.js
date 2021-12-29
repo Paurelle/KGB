@@ -3,6 +3,14 @@ let specialityChoice = [];
 $(document).ready(function(){
     $("select.agent").change(function(){
        select = $(this).children("option:selected").val();
+
+       if (select == "default") {
+         document.querySelector('.agentModify').style.display = "none";
+      } else {
+         document.querySelector('.agentModify').style.display = "block";
+         
+      }
+
       $.ajax({
          type:"POST", 	        
          url:"models/Agent.php",  
@@ -39,14 +47,6 @@ $(document).ready(function(){
 
     document.getElementsByName('modifyCodeAgent')[0].placeholder=code;
     document.getElementsByName('modifyCodeAgent')[0].value = code;
-
-    if (select == "default") {
-       document.querySelector('.agentModify').style.display = "none";
-    } else {
-       document.querySelector('.agentModify').style.display = "block";
-       return speciality;
-    }
-
-    
+    return speciality;
  }
  

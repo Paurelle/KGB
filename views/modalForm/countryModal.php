@@ -70,7 +70,6 @@
                                 <div class="form">
                                     <label for="countrySelectDelete">Delete an country:</label>
                                     <select name="deleteCountry" id="countrySelectDelete" class="countryDelete">
-                                        <option value="default"></option>
                                         <?php 
                                         foreach ($countrysDetails as $countrysDetail) {
                                         ?>
