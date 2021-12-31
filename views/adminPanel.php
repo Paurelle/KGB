@@ -34,10 +34,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="views/js/jquery-3.6.0.min.js"></script>
+
+    <script type="text/javascript" src="views/mselect/chosen.jquery.min.js"></script>
+
+
+    <link rel="stylesheet" href="views/mselect/chosen.min.css">
     <link rel="stylesheet" href="views/css/navbar.css">
     <link rel="stylesheet" href="views/css/adminPanel.css">
     <link rel="stylesheet" href="views/css/modalForm.css">
+    
     <title>Admin panel</title>
 </head>
 <body>
