@@ -28,6 +28,19 @@ class Contact {
         return $row;
     }
 
+    public function getdetailsContactMission($value){
+        $this->bdd->prepare('SELECT * FROM aide
+        JOIN contacts ON contacts.id_contact = aide.id_contact
+        JOIN pays ON pays.id_pays = contacts.id_pays
+        WHERE aide.id_mission =  :value');
+
+        $this->bdd->bind(':value', $value);
+
+        $row = $this->bdd->resultSet();
+
+        return $row;
+    }
+
     public function register($data){
         $this->bdd->prepare('INSERT INTO contacts (nom, prenom, date_naissance, nom_code, id_pays) VALUES (:name, :lastname, :birthDate, :codeName, :country)');
         //Bind values

@@ -28,6 +28,19 @@ class Stash {
         return $row;
     }
 
+    public function getdetailsStashMission($value){
+        $this->bdd->prepare('SELECT * FROM utilise
+        JOIN planques ON planques.id_planque = utilise.id_planque
+        JOIN pays ON pays.id_pays = planques.id_pays
+        WHERE utilise.id_mission = :value');
+
+        $this->bdd->bind(':value', $value);
+
+        $row = $this->bdd->resultSet();
+
+        return $row;
+    }
+
     public function register($data){
         $this->bdd->prepare('INSERT INTO planques (code, adresse, type, id_pays) VALUES (:code, :adress, :type, :country)');
         //Bind values

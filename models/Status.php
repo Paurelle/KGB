@@ -18,6 +18,9 @@ class Status {
         return $row;
     }
 
+    
+    
+
     public function getSpecificStatus($value){
         $this->bdd->prepare('SELECT * FROM statuts WHERE statut = :value');
 

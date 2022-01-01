@@ -130,68 +130,66 @@
 
                                 <br>
                                 <br>
-                                <!--
-                                <label for="stashSelecte">Stash</label>
-                                <select name="stashSelecte[]" id="stashSelecte" multiple="">
-                                    <?php /*
+                                <button type="button" onclick='drop("astash")'>stach</button>
+                                <div id="astash" style="display:none;">
+                                    <?php 
                                     foreach ($stashDetails as $stashDetail) {
                                     ?>
-                                        <option value="<?=$stashDetail->id_planque?>"><?=$stashDetail->code?></option>
+                                        <div class="checkbox">
+                                            <label for="<?="addMissionStash_".$stashDetail->id_planque?>"><?=$stashDetail->code?></label>
+                                            <input type="checkbox" id="<?="addMissionStash_".$stashDetail->id_planque?>" name="stashSelecte[]" value="<?=$stashDetail->id_planque?>">
+                                        </div>
                                     <?php 
-                                    }*/
+                                    }
                                     ?>
-                                </select>-->
-                                <button type="button" onclick='drop("stash")'>Agent</button>
-                                    <div id="stash" style="display:none;">
-                                        <?php 
-                                        foreach ($stashDetails as $stashDetail) {
-                                        ?>
-                                            <div class="checkbox">
-                                                <label for="<?="modifyMissionStash_".$stashDetail->id_planque?>"><?=$stashDetail->adresse?></label>
-                                                <input type="checkbox" id="<?="modifyMissionStash_".$stashDetail->id_planque?>" name="stashSelecte[]" value="<?=$stashDetail->id_planque?>">
-                                            </div>
-                                        <?php 
-                                        }
-                                        ?>
                                 </div>
                                 <br>
                                 <br>
-                                <label for="agentSelecte">Agent</label>
-                                <select name="agentSelecte[]" id="agentSelecte" multiple="">
+                                <button type="button" onclick='drop("aagent")'>Agent</button>
+                                <div id="aagent" style="display:none;">
                                     <?php 
                                     foreach ($agentDetails as $agentDetail) {
                                     ?>
-                                        <option value="<?=$agentDetail->id_agent?>"><?=$agentDetail->nom?></option>
+                                        <div class="checkbox">
+                                            <label for="<?="addMissionAgent_".$agentDetail->id_agent?>"><?=$agentDetail->nom?></label>
+                                            <input type="checkbox" id="<?="addMissionAgent_".$agentDetail->id_agent?>" name="agentSelecte[]" value="<?=$agentDetail->id_agent?>">
+                                        </div>
                                     <?php 
                                     }
                                     ?>
-                                </select>
+                                </div>
                                 <br>
                                 <br>
-                                <label for="contactSelecte">Contact</label>
-                                <select  name="contactSelecte[]" id="contactSelecte" multiple="">
+                                <button type="button" onclick='drop("acontact")'>Contact</button>
+                                <div id="acontact" style="display:none;">
                                     <?php 
                                     foreach ($contactDetails as $contactDetail) {
                                     ?>
-                                        <option value="<?=$contactDetail->id_contact?>"><?=$contactDetail->nom?></option>
+                                        <div class="checkbox">
+                                            <label for="<?="addMissionContact_".$contactDetail->id_contact?>"><?=$contactDetail->nom?></label>
+                                            <input type="checkbox" id="<?="addMissionContact_".$contactDetail->id_contact?>" name="contactSelecte[]" value="<?=$contactDetail->id_contact?>">
+                                        </div>
                                     <?php 
                                     }
                                     ?>
-                                </select>
+                                </div>
                                 <br>
                                 <br>
-                                <label for="targetSelecte">Target</label>
-                                <select name="targetSelecte[]" id="targetSelecte" multiple="">
+                                <button type="button" onclick='drop("atarget")'>Target</button>
+                                <div id="atarget" style="display:none;">
                                     <?php 
                                     foreach ($targetDetails as $targetDetail) {
                                     ?>
-                                        <option value="<?=$targetDetail->id_cible?>"><?=$targetDetail->nom?></option>
+                                        <div class="checkbox">
+                                            <label for="<?="addMissionTarget_".$targetDetail->id_cible?>"><?=$targetDetail->nom?></label>
+                                            <input type="checkbox" id="<?="addMissionTarget_".$targetDetail->id_cible?>" name="targetSelecte[]" value="<?=$targetDetail->id_cible?>">
+                                        </div>
                                     <?php 
                                     }
                                     ?>
-                                </select>
-
+                                </div>
                             </div>
+                            <br>
                             <br>
                             <button type="submit">Envoyer</button>
                         </form>
@@ -279,8 +277,8 @@
                                     <br>
                                     <br>
                                     
-                                    <button type="button" onclick='drop("stash")'>Agent</button>
-                                    <div id="stash" style="display:none;">
+                                    <button type="button" onclick='drop("mstash")'>Stash</button>
+                                    <div id="mstash" style="display:none;">
                                         <?php 
                                         foreach ($stashDetails as $stashDetail) {
                                         ?>
@@ -292,10 +290,54 @@
                                         }
                                         ?>
                                     </div>
-                                        <!-- SCRIPT MEGA IMPORTANT -->
-                                        <script src="lo.js"></script>
+                                    <br>
+                                    <br>
+                                    <button type="button" onclick='drop("magent")'>Agent</button>
+                                    <div id="magent" style="display:none;">
+                                        <?php 
+                                        foreach ($agentDetails as $agentDetail) {
+                                        ?>
+                                            <div class="checkbox">
+                                                <label for="<?="modifyMissionAgent_".$agentDetail->id_agent?>"><?=$agentDetail->nom?></label>
+                                                <input type="checkbox" id="<?="modifyMissionAgent_".$agentDetail->id_agent?>" name="mofidyMissionAgent[]" value="<?=$agentDetail->id_agent?>">
+                                            </div>
+                                        <?php 
+                                        }
+                                        ?>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <button type="button" onclick='drop("mcontact")'>Contact</button>
+                                    <div id="mcontact" style="display:none;">
+                                        <?php 
+                                        foreach ($contactDetails as $contactDetail) {
+                                        ?>
+                                            <div class="checkbox">
+                                                <label for="<?="modifyMissionContact_".$contactDetail->id_contact?>"><?=$contactDetail->nom?></label>
+                                                <input type="checkbox" id="<?="modifyMissionContact_".$contactDetail->id_contact?>" name="mofidyMissionContact[]" value="<?=$contactDetail->id_contact?>">
+                                            </div>
+                                        <?php 
+                                        }
+                                        ?>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <button type="button" onclick='drop("mtarget")'>Target</button>
+                                    <div id="mtarget" style="display:none;">
+                                        <?php 
+                                        foreach ($targetDetails as $targetDetail) {
+                                        ?>
+                                            <div class="checkbox">
+                                                <label for="<?="modifyMissionTarget_".$targetDetail->id_cible?>"><?=$targetDetail->nom?></label>
+                                                <input type="checkbox" id="<?="modifyMissionTarget_".$targetDetail->id_cible?>" name="mofidyMissionTarget[]" value="<?=$targetDetail->id_cible?>">
+                                            </div>
+                                        <?php 
+                                        }
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
+                            <br>
                             <br>
                             <button type="submit">Envoyer</button>
                         </form>

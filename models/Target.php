@@ -28,6 +28,19 @@ class Target {
         return $row;
     }
 
+    public function getdetailsTargetMission($value){
+        $this->bdd->prepare('SELECT * FROM vise
+        JOIN cibles ON cibles.id_cible = vise.id_cible
+        JOIN pays ON pays.id_pays = cibles.id_pays
+        WHERE vise.id_mission =  :value');
+
+        $this->bdd->bind(':value', $value);
+
+        $row = $this->bdd->resultSet();
+
+        return $row;
+    }
+
     public function register($data){
         $this->bdd->prepare('INSERT INTO cibles (nom, prenom, date_naissance, nom_code, id_pays) VALUES (:name, :lastname, :birthDate, :codeName, :country)');
         //Bind values

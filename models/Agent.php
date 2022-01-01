@@ -28,6 +28,31 @@ class Agent {
         return $row;
     }
 
+    public function getdetailsAgentMission($value){
+        $this->bdd->prepare('SELECT * FROM deploiement
+        JOIN agents ON agents.id_agent = deploiement.id_agent
+        JOIN pays ON pays.id_pays = agents.id_pays
+        WHERE deploiement.id_mission =  :value');
+
+        $this->bdd->bind(':value', $value);
+
+        $row = $this->bdd->resultSet();
+
+        return $row;
+    }
+
+    public function getdetailsAgentSpecialiteMission($value){
+        $this->bdd->prepare('SELECT * FROM acquis
+        JOIN specialites ON specialites.id_specialite = acquis.id_specialite
+        WHERE acquis.id_agent = :value');
+
+        $this->bdd->bind(':value', $value);
+
+        $row = $this->bdd->resultSet();
+
+        return $row;
+    }
+
     public function register($data){
         $this->bdd->prepare('INSERT INTO agents (nom, prenom, date_naissance, code_identification, id_pays) VALUES (:name, :lastname, :birthDate, :code, :country)');
         //Bind values

@@ -1,8 +1,8 @@
 
-  
+var choice = [];
 
 $(document).ready(function(){
-   $('#mStashSelecte option[value="56487"]').prop('selected', true);
+   //$('#mStashSelecte option[value="56487"]').prop('selected', true);
     $("select.mission").change(function(){
        select = $(this).children("option:selected").val();
 
@@ -19,13 +19,15 @@ $(document).ready(function(){
          dataType: "json",
          data:"valeur="+select+"&type="+"ajaxRequest",
          success:function(data){
-             missionModify(data.title, data.description, data.codeName, data.startDate, data.endDate, data.country, data.speciality, data.typeMission, data.statut, data.stash);
+            choice = missionModify(data.title, data.description, data.codeName, data.startDate, data.endDate, data.country, data.speciality, data.typeMission, data.statut,
+               data.stash, data.agent, data.contact, data.target, choice[0], choice[1], choice[2], choice[3]);
          }
       })
     });
   });
  
-function missionModify(title, description, codeName, startDate, endDate, country, speciality, typeMission, statut, stash) {
+function missionModify(title, description, codeName, startDate, endDate, country, speciality, typeMission, statut, 
+   stash, agent, contact, target, stashChoice, agentChoice, contactChoice, targetChoice) {
    
     document.getElementsByName('modifyTitleMission')[0].placeholder=title;
     document.getElementsByName('modifyTitleMission')[0].value = title;
@@ -46,8 +48,45 @@ function missionModify(title, description, codeName, startDate, endDate, country
    document.getElementById("modifySpecialityMission_"+speciality).selected= true;
    document.getElementById("modifyTypeMissionMission_"+typeMission).selected= true;
    document.getElementById("modifyStatusMission_"+statut).selected= true;
+   
+   if (stashChoice != null)  {
+      for (let index = 0; index < stashChoice.length; index++) {
+         document.getElementById("modifyMissionStash_"+stashChoice[index]).checked = false;
+      }
+   }
+   if (agentChoice != null)  {
+      for (let index = 0; index < agentChoice.length; index++) {
+         document.getElementById("modifyMissionAgent_"+agentChoice[index]).checked = false;
+      }
+   }
+   if (contactChoice != null)  {
+      for (let index = 0; index < contactChoice.length; index++) {
+         document.getElementById("modifyMissionContact_"+contactChoice[index]).checked = false;
+      }
+   }
+   if (targetChoice != null)  {
+      for (let index = 0; index < targetChoice.length; index++) {
+         document.getElementById("modifyMissionTarget_"+targetChoice[index]).checked = false;
+      }
+   }
+
 
    for (let index = 0; index < stash.length; index++) {
       document.getElementById("modifyMissionStash_"+stash[index]).checked = true;
    }
+   
+   for (let index = 0; index < agent.length; index++) {
+      document.getElementById("modifyMissionAgent_"+agent[index]).checked = true;
+   }
+
+   for (let index = 0; index < contact.length; index++) {
+      document.getElementById("modifyMissionContact_"+contact[index]).checked = true;
+   }
+
+   for (let index = 0; index < target.length; index++) {
+      document.getElementById("modifyMissionTarget_"+target[index]).checked = true;
+   }
+
+   let element = [stash, agent, contact, target];
+   return element;
  }
