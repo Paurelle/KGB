@@ -49,9 +49,11 @@
                 </button>
                 <div id="modal10" class="modal">
                     <div class="modal-content">
-                        <button class="switch-btn" style="background: green" onclick="addForm()">Add</button>
-                        <button class="switch-btn" style="background: yellow" onclick="modifyForm()">Modify</button>
-                        <button class="switch-btn" style="background: red" onclick="deleteForm()">Delete</button>
+                        <div class="btn-content">
+                            <button class="switch-btn" onclick="addForm()">Add</button>
+                            <button class="switch-btn" onclick="modifyForm()">Modify</button>
+                            <button class="switch-btn" onclick="deleteForm()">Delete</button>
+                        </div>
 
                         <div class="contact-form">
                         <a class="close">&times;</a>
@@ -66,7 +68,7 @@
                                 <input type="text" name="addTitleMission" id="addTitleMission">
 
                                 <label for="addDescriptionMission">description</label>
-                                <input type="text" name="addDescriptionMission" id="addDescriptionMission">
+                                <textarea name="addDescriptionMission" id="addDescriptionMission" rows="5" cols="33" maxlength="350"></textarea>
 
                                 <label for="addCodeNameMission">Code name</label>
                                 <input type="text" name="addCodeNameMission" id="addCodeNameMission">
@@ -77,7 +79,7 @@
                                 <label for="addEndDateMission">End date</label>
                                 <input type="date" name="addEndDateMission" id="addEndDateMission">
 
-                                <label for="addCountryMission">Country</label>
+                                <label class="select" for="addCountryMission">Country</label>
                                 <select name="addCountryMission" id="addCountryMission">
                                     <option value="default"></option>
                                     <?php 
@@ -89,8 +91,7 @@
                                     ?>
                                 </select>
                                 <br>
-                                <br>
-                                <label for="addSpecialityMission">Speciality</label>
+                                <label class="select" for="addSpecialityMission">Speciality</label>
                                 <select name="addSpecialityMission" id="addSpecialityMission">
                                     <option value="default"></option>
                                     <?php 
@@ -102,8 +103,7 @@
                                     ?>
                                 </select>
                                 <br>
-                                <br>
-                                <label for="addMissionTypeMission">Mission Type</label>
+                                <label class="select" for="addMissionTypeMission">Mission Type</label>
                                 <select name="addMissionTypeMission" id="addMissionTypeMission">
                                     <option value="default"></option>
                                     <?php 
@@ -115,8 +115,7 @@
                                     ?>
                                 </select>
                                 <br>
-                                <br>
-                                <label for="addStatutMission">Statut</label>
+                                <label class="select" for="addStatutMission">Statut</label>
                                 <select name="addStatutMission" id="addStatutMission">
                                     <option value="default"></option>
                                     <?php 
@@ -127,26 +126,26 @@
                                     }
                                     ?>
                                 </select>
-
                                 <br>
-                                <br>
-                                <button type="button" onclick='drop("astash")'>stach</button>
+                                <button class="btn-list" type="button" onclick='drop("astash")'>stach</button>
                                 <div id="astash" style="display:none;">
+                                    <div class="checkbox-content">
                                     <?php 
                                     foreach ($stashDetails as $stashDetail) {
                                     ?>
                                         <div class="checkbox">
-                                            <label for="<?="addMissionStash_".$stashDetail->id_planque?>"><?=$stashDetail->code?></label>
+                                            <label for="<?="addMissionStash_".$stashDetail->id_planque?>"><?=$stashDetail->adresse?></label>
                                             <input type="checkbox" id="<?="addMissionStash_".$stashDetail->id_planque?>" name="stashSelecte[]" value="<?=$stashDetail->id_planque?>">
                                         </div>
                                     <?php 
                                     }
                                     ?>
+                                    </div>
                                 </div>
                                 <br>
-                                <br>
-                                <button type="button" onclick='drop("aagent")'>Agent</button>
+                                <button class="btn-list" type="button" onclick='drop("aagent")'>Agent</button>
                                 <div id="aagent" style="display:none;">
+                                    <div class="checkbox-content">
                                     <?php 
                                     foreach ($agentDetails as $agentDetail) {
                                     ?>
@@ -157,11 +156,12 @@
                                     <?php 
                                     }
                                     ?>
+                                    </div>
                                 </div>
                                 <br>
-                                <br>
-                                <button type="button" onclick='drop("acontact")'>Contact</button>
+                                <button class="btn-list" type="button" onclick='drop("acontact")'>Contact</button>
                                 <div id="acontact" style="display:none;">
+                                    <div class="checkbox-content">
                                     <?php 
                                     foreach ($contactDetails as $contactDetail) {
                                     ?>
@@ -172,11 +172,12 @@
                                     <?php 
                                     }
                                     ?>
+                                    </div>
                                 </div>
                                 <br>
-                                <br>
-                                <button type="button" onclick='drop("atarget")'>Target</button>
+                                <button class="btn-list" type="button" onclick='drop("atarget")'>Target</button>
                                 <div id="atarget" style="display:none;">
+                                    <div class="checkbox-content">
                                     <?php 
                                     foreach ($targetDetails as $targetDetail) {
                                     ?>
@@ -187,11 +188,11 @@
                                     <?php 
                                     }
                                     ?>
+                                    </div>
                                 </div>
                             </div>
                             <br>
-                            <br>
-                            <button type="submit">Envoyer</button>
+                            <button type="submit"  class="submit">Envoyer</button>
                         </form>
                         <!-- form -->
                         
@@ -209,14 +210,14 @@
                                     <?php 
                                     }
                                     ?>
-                                </select><br>
-
+                                </select>
+                                <br>
                                 <div class="missionModify" style="display: none">
                                     <label for="modifyTitleMission">Title</label>
                                     <input type="text" name="modifyTitleMission" id="modifyTitleMission">
 
                                     <label for="modifyDescriptionMission">description</label>
-                                    <input type="text" name="modifyDescriptionMission" id="addDescmodifyDescriptionMissionriptionMission">
+                                    <textarea type="text" name="modifyDescriptionMission" id="addDescmodifyDescriptionMissionriptionMission"  rows="5" cols="33" maxlength="350"></textarea>
 
                                     <label for="modifyCodeNameMission">Code name</label>
                                     <input type="text" name="modifyCodeNameMission" id="modifyCodeNameMission">
@@ -227,7 +228,7 @@
                                     <label for="modifyEndDateMission">End date</label>
                                     <input type="date" name="modifyEndDateMission" id="modifyEndDateMission">
 
-                                    <label for="modifyCountryMission">Country</label>
+                                    <label class="select" for="modifyCountryMission">Country</label>
                                     <select name="modifyCountryMission" id="modifyCountryMission">
                                         <?php 
                                         foreach ($countryDetails as $countryDetail) {
@@ -238,8 +239,7 @@
                                         ?>
                                     </select>
                                     <br>
-                                    <br>
-                                    <label for="modifySpecialityMission">Speciality</label>
+                                    <label class="select" for="modifySpecialityMission">Speciality</label>
                                     <select name="modifySpecialityMission" id="modifySpecialityMission">
                                         <?php 
                                         foreach ($specialityDetails as $specialityDetail) {
@@ -250,8 +250,7 @@
                                         ?>
                                     </select>
                                     <br>
-                                    <br>
-                                    <label for="modifyMissionTypeMission">Mission Type</label>
+                                    <label class="select" for="modifyMissionTypeMission">Mission Type</label>
                                     <select name="modifyMissionTypeMission" id="modifyMissionTypeMission">
                                         <?php 
                                         foreach ($missionTypeDetails as $missionTypeDetail) {
@@ -262,8 +261,7 @@
                                         ?>
                                     </select>
                                     <br>
-                                    <br>
-                                    <label for="modifyStatutMission">Statut</label>
+                                    <label class="select" for="modifyStatutMission">Statut</label>
                                     <select name="modifyStatutMission" id="modifyStatutMission">
                                         <?php 
                                         foreach ($statusDetails as $statusDetail) {
@@ -273,12 +271,10 @@
                                         }
                                         ?>
                                     </select>
-
-                                    <br>
-                                    <br>
                                     
-                                    <button type="button" onclick='drop("mstash")'>Stash</button>
+                                    <button class="btn-list" type="button" onclick='drop("mstash")'>Stash</button>
                                     <div id="mstash" style="display:none;">
+                                        <div class="checkbox-content">
                                         <?php 
                                         foreach ($stashDetails as $stashDetail) {
                                         ?>
@@ -289,11 +285,12 @@
                                         <?php 
                                         }
                                         ?>
+                                        </div>
                                     </div>
                                     <br>
-                                    <br>
-                                    <button type="button" onclick='drop("magent")'>Agent</button>
+                                    <button class="btn-list" type="button" onclick='drop("magent")'>Agent</button>
                                     <div id="magent" style="display:none;">
+                                        <div class="checkbox-content">
                                         <?php 
                                         foreach ($agentDetails as $agentDetail) {
                                         ?>
@@ -304,11 +301,12 @@
                                         <?php 
                                         }
                                         ?>
+                                        </div>
                                     </div>
                                     <br>
-                                    <br>
-                                    <button type="button" onclick='drop("mcontact")'>Contact</button>
+                                    <button class="btn-list" type="button" onclick='drop("mcontact")'>Contact</button>
                                     <div id="mcontact" style="display:none;">
+                                        <div class="checkbox-content">
                                         <?php 
                                         foreach ($contactDetails as $contactDetail) {
                                         ?>
@@ -319,11 +317,12 @@
                                         <?php 
                                         }
                                         ?>
+                                        </div>
                                     </div>
                                     <br>
-                                    <br>
-                                    <button type="button" onclick='drop("mtarget")'>Target</button>
+                                    <button class="btn-list" type="button" onclick='drop("mtarget")'>Target</button>
                                     <div id="mtarget" style="display:none;">
+                                        <div class="checkbox-content">
                                         <?php 
                                         foreach ($targetDetails as $targetDetail) {
                                         ?>
@@ -334,12 +333,12 @@
                                         <?php 
                                         }
                                         ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <br>
-                            <br>
-                            <button type="submit">Envoyer</button>
+                            <button type="submit"  class="submit">Envoyer</button>
                         </form>
                         <!-- form -->
                         <form action="controllers/Missions.php" method="POST" id="form30" class="formX">
@@ -357,7 +356,7 @@
                                     ?>
                                 </select>
                             </div><br>
-                            <button type="submit" href="adminPanel.php">Envoyer</button>
+                            <button type="submit" class="submit">Envoyer</button>
                         </form>
                         </div>
                     </div>

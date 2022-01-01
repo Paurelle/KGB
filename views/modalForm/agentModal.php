@@ -23,9 +23,12 @@
                 </button>
                 <div id="modal1" class="modal">
                     <div class="modal-content">
-                        <button class="switch-btn" style="background: green" onclick="addForm()">Add</button>
-                        <button class="switch-btn" style="background: yellow" onclick="modifyForm()">Modify</button>
-                        <button class="switch-btn" style="background: red" onclick="deleteForm()">Delete</button>
+                        <div class="btn-content">
+                            <button class="switch-btn" onclick="addForm()">Add</button>
+                            <button class="switch-btn" onclick="modifyForm()">Modify</button>
+                            <button class="switch-btn" onclick="deleteForm()">Delete</button>
+                        </div>
+                        
 
                         <div class="contact-form">
                         <a class="close">&times;</a>
@@ -43,7 +46,7 @@
                                 <label for="addBirthDateAgent">Birth date</label>
                                 <input type="date" name="addBirthDateAgent" id="addBirthDateAgent">
 
-                                <label for="addCountryAgent">Country</label>
+                                <label class="select" for="addCountryAgent">Country</label>
                                 <select name="addCountryAgent" id="addCountryAgent">
                                     <option value="default"></option>
                                     <?php 
@@ -53,8 +56,10 @@
                                     <?php 
                                     }
                                     ?>
-                                </select><br>
-
+                                </select>
+                                <br>
+                                <label for="checkbox-speciality">Specialities</label>
+                                <div id="checkbox-speciality" class="checkbox-content">
                                 <?php 
                                 foreach ($specialityDetails as $specialityDetail) {
                                 ?>
@@ -65,12 +70,12 @@
                                 <?php 
                                 }
                                 ?>
-                                
+                                </div>
                                 <label for="addCodeAgent">Code identification</label>
                                 <input type="text" name="addCodeAgent" id="addCodeAgent">
                                 
                             </div>
-                            <button type="submit">Envoyer</button>
+                            <button type="submit" class="submit">Envoyer</button>
                         </form>
                         <!-- form -->
                         <script src="views/js/modifyModal/agentModifyForm.js"></script>
@@ -100,7 +105,7 @@
                                     <label for="modifyBirthDateAgent">Birth date</label>
                                     <input type="date" name="modifyBirthDateAgent" id="modifyBirthDateAgent">
 
-                                    <label for="modifyCountryAgent">Country</label>
+                                    <label class="select" for="modifyCountryAgent">Country</label>
                                     <select name="modifyCountryAgent" id="modifyCountryAgent">
                                         <?php 
                                         foreach ($countryDetails as $countryDetail) {
@@ -109,8 +114,10 @@
                                         <?php 
                                         }
                                         ?>
-                                    </select><br>
-
+                                    </select>
+                                    <br>
+                                    <label for="checkbox-speciality">Specialities</label>
+                                    <div id="checkbox-speciality" class="checkbox-content">
                                     <?php 
                                     foreach ($specialityDetails as $specialityDetail) {
                                     ?>
@@ -121,11 +128,11 @@
                                     <?php 
                                     }
                                     ?>
-                                    
+                                    </div>
                                     <label for="modifyCodeAgent">Code identification</label>
                                     <input type="text" name="modifyCodeAgent" id="modifyCodeAgent">
 
-                                    <button type="submit">Envoyer</button>
+                                    <button type="submit" class="submit">Envoyer</button>
                                 </div>
                             </div>
                         </form>
@@ -145,7 +152,7 @@
                                     ?>
                                 </select>
                             </div><br>
-                            <button type="submit">Envoyer</button>
+                            <button type="submit" class="submit">Envoyer</button>
                         </form>
                         </div>
                     </div>

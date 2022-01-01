@@ -41,18 +41,18 @@ class Missions {
             redirect("../adminPanel.php");
         }
 
-        if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['title'])){
+        if(!preg_match("/^[a-zA-Zéèçàê.;?,'() ]*$/", $data['title'])){
             flash("infoForm", "Invalid title");
             redirect("../adminPanel.php");
         }
 
         if(strlen($data['description']) > 350){
-            flash("infoForm", "Invalid description la taille ". strlen($data['description'])  ." et superieur a 350 caractere");
+            flash("infoForm", "Invalid description size ". strlen($data['description'])  ." and greater than 350 characters");
             redirect("../adminPanel.php");
         }
 
         if(!preg_match("/^[0-9a-zA-Zéèçàê ]*$/", $data['codeName'])){
-            flash("infoForm", "Invalid description");
+            flash("infoForm", "Invalid codeName");
             redirect("../adminPanel.php");
         }
 
@@ -77,27 +77,27 @@ class Missions {
         }
 
         if($this->missionModel->findMissionByCodeName($data['codeName'])){
-            flash("infoForm", $data['codeName']." déjà pris");
+            flash("infoForm", $data['codeName']." already taken");
             redirect("../adminPanel.php");
         }
 
         if ($this->missionModel->nationalityTestAgentTarget($data)) {
-            flash("infoForm", " un agent et une target on la meme nationality");
+            flash("infoForm", " An agent and a target have the same nationality");
             redirect("../adminPanel.php");
         }
 
         if ($this->missionModel->countrytestContactMission($data)) {
-            flash("infoForm", "le contact doit avoir le meme pay que la mission");
+            flash("infoForm", "The contact must have the same pay as the mission");
             redirect("../adminPanel.php");
         }
 
         if ($this->missionModel->stashtestStashMission($data)) {
-            flash("infoForm", "la planque doit avoir le meme pays que la mission");
+            flash("infoForm", "The hideout must have the same country as the mission");
             redirect("../adminPanel.php");
         }
 
         if($this->missionModel->register($data)){
-            flash("infoForm", "La mission ". $data['title'] ." a bien êtait créé !", 'form-message form-message-green');
+            flash("infoForm", $data['title'] ." has been created !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -138,7 +138,7 @@ class Missions {
         }
 
         if(strlen($data['description']) > 350){
-            flash("infoForm", "Invalid description la taille ". strlen($data['description'])  ." et superieur a 350 caractere");
+            flash("infoForm", "Invalid description size ". strlen($data['description'])  ." and greater than 350 characters");
             redirect("../adminPanel.php");
         }
 
@@ -168,33 +168,33 @@ class Missions {
         }
 
         if($data['mission'] == "default"){
-            flash("infoForm", "vous ne pouvez pas modifier la valeur par default");
+            flash("infoForm", "You cannot change the default");
             redirect("../adminPanel.php");
         }
         
         if ($this->missionModel->nationalityTestAgentTarget($data)) {
-            flash("infoForm", " un agent et une target on la meme nationality");
+            flash("infoForm", " An agent and a target have the same nationality");
             redirect("../adminPanel.php");
         }
 
 
         if ($this->missionModel->countrytestContactMission($data)) {
-            flash("infoForm", "le contact doit avoir le meme pay que la mission");
+            flash("infoForm", "The contact must have the same pay as the mission");
             redirect("../adminPanel.php");
         }
 
         if ($this->missionModel->stashtestStashMission($data)) {
-            flash("infoForm", "la planque doit avoir le meme pays que la mission");
+            flash("infoForm", "The hideout must have the same country as the mission");
             redirect("../adminPanel.php");
         }
   
         if ($this->missionModel->agenttestAgentMission($data)) {
-            flash("infoForm", "il doit y avoir au moin 1 agent avec la specialité de la mission");
+            flash("infoForm", "There must be at least 1 agent with the specialty of the mission");
             redirect("../adminPanel.php");
         }
 
         if($this->missionModel->modify($data)){
-            flash("infoForm", "L'agent ". $data['name'] ." a bien êtait modifier", 'form-message form-message-green');
+            flash("infoForm", $data['name'] ." has been modified !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -212,14 +212,14 @@ class Missions {
         ];
 
         if (empty($data['mission'])) {
-            flash("infoForm", "Une erreur c'est produit !");
+            flash("infoForm", "An error occurred!");
             redirect("../adminPanel.php");
         }
 
         $missionInfo = $this->missionModel->getSpecificMission($data['mission']);
 
         if($this->missionModel->delete($data)){
-            flash("infoForm", "La mission ". $missionInfo->{'titre'} ." a bien êtait suprimer", 'form-message form-message-green');
+            flash("infoForm", $missionInfo->{'titre'} ." has been deleted !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -243,7 +243,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $init->delete();
             break;
         default:
-            flash("infoForm", "Une erreur c'est produit !");
+            flash("infoForm", "An error occurred !");
             redirect("../adminPanel.php");
     }
 

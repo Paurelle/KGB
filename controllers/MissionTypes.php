@@ -26,18 +26,18 @@ class MissionTypes {
             redirect("../adminPanel.php");
         }
         
-        if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['missionType'])){
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['missionType'])){
             flash("infoForm", "Invalid MissionType");
             redirect("../adminPanel.php");
         }
 
         if($this->missionTypeModel->findMissionTypeByName($data['missionType'])){
-            flash("infoForm", $data['missionType']." déjà pris");
+            flash("infoForm", $data['missionType']." already taken");
             redirect("../adminPanel.php");
         }
 
         if($this->missionTypeModel->register($data)){
-            flash("infoForm", "Le type de mission ". $data['missionType'] ." a bien êtait créé !", 'form-message form-message-green');
+            flash("infoForm", $data['missionType'] ." has been created !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -54,13 +54,19 @@ class MissionTypes {
             'missionTypeModify' => trim($_POST['missionTypeModify'])
         ];
 
-        if (empty($data['missionType'])) {
-            flash("infoForm", "Une erreur c'est produit !");
+        // Validate inputs
+        if (empty($data['missionTypeModify'])) {
+            flash("infoForm", "Please complete all entries");
+            redirect("../adminPanel.php");
+        }
+        
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['missionTypeModify'])){
+            flash("infoForm", "Invalid MissionType");
             redirect("../adminPanel.php");
         }
         
         if($this->missionTypeModel->modify($data)){
-            flash("infoForm", "Le type de mission ". $data['missionType'] ." a bien êtait modifier", 'form-message form-message-green');
+            flash("infoForm", $data['missionType'] ." has been modified", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -78,12 +84,12 @@ class MissionTypes {
         ];
 
         if (empty($data['missionType'])) {
-            flash("infoForm", "Une erreur c'est produit !");
+            flash("infoForm", "An error occurred !");
             redirect("../adminPanel.php");
         }
 
         if ($data['missionType'] == "default") {
-            flash("infoForm", "vous ne pouvez pas suprimer la valeur par default");
+            flash("infoForm", "You cannot remove the default");
             redirect("../adminPanel.php");
         }
 
@@ -91,12 +97,12 @@ class MissionTypes {
         $missionTypeId = $missionTypeInfo->{'id_type_mission'};
 
         if ($this->missionTypeModel->findMissionTypeInOtherTable($missionTypeId)) {
-            flash("infoForm", $data['missionType']." ne peut pas se faire surpimer car une autre table contien se statut");
+            flash("infoForm", $data['missionType']." cannot be deleted because another table contains its status");
             redirect("../adminPanel.php");
         }
         
         if($this->missionTypeModel->delete($data['missionType'])){
-            flash("infoForm", "Le statut ". $data['missionType'] ." a bien êtait suprimer", 'form-message form-message-green');
+            flash("infoForm", $data['missionType'] ." has been deleted !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -120,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $init->delete();
             break;
         default:
-            flash("infoForm", "Une erreur c'est produit !");
+            flash("infoForm", "An error occurred !");
             redirect("../adminPanel.php");
     }
 }

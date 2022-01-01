@@ -21,23 +21,23 @@
             ];
 
             if(empty($data['speciality'])){
-                flash("infoForm", "Veuillez remplir toutes les entrées");
+                flash("infoForm", "Please complete all entries");
                 redirect("../adminPanel.php");
             }
 
-            if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['speciality'])){
-                flash("infoForm", "Invalid Status");
+            if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['speciality'])){
+                flash("infoForm", "Invalid speciality");
                 redirect("../adminPanel.php");
             }
 
             //User with the same email or password already exists
             if($this->specialityModel->findspecialityByName($data['speciality'])){
-                flash("infoForm", "Speciality déjà pris");
+                flash("infoForm", $data['speciality']." already taken");
                 redirect("../adminPanel.php");
             }
 
             if($this->specialityModel->register($data)){
-                flash("infoForm", "La spécialité ". $data['speciality'] ." a bien êtait créé !", 'form-message form-message-green');
+                flash("infoForm", $data['speciality'] ." has been created !", 'form-message form-message-green');
                 redirect("../adminPanel.php");
             }else{
                 die("Something went wrong");
@@ -53,18 +53,23 @@
                 'specialityModify' => trim($_POST['specialityModify'])
             ];
 
-            if (empty($data['speciality'])) {
-                flash("infoForm", "Une erreur c'est produit !");
+            if(empty($data['specialityModify'])){
+                flash("infoForm", "Please complete all entries");
+                redirect("../adminPanel.php");
+            }
+
+            if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['specialityModify'])){
+                flash("infoForm", "Invalid speciality");
                 redirect("../adminPanel.php");
             }
 
             if ($data['speciality'] == "default") {
-                flash("infoForm", "vous ne pouvez pas modifier la valeur par default");
+                flash("infoForm", "You cannot change the default");
                 redirect("../adminPanel.php");
             }
 
             if($this->specialityModel->modify($data)){
-                flash("infoForm", "La spécialité ". $data['speciality'] ." a bien êtait modifier en ".$data['specialityModify'], 'form-message form-message-green');
+                flash("infoForm", $data['speciality'] ." has been modified !", 'form-message form-message-green');
                 redirect("../adminPanel.php");
             }else{
                 die("Something went wrong");
@@ -82,7 +87,7 @@
             ];
     
             if (empty($data['speciality'])) {
-                flash("infoForm", "Une erreur c'est produit !");
+                flash("infoForm", "An error occurred !");
                 redirect("../adminPanel.php");
             }
 
@@ -90,12 +95,12 @@
             $specialityId = $specialityInfo->{'id_specialite'};
     
             if ($this->specialityModel->findSpecialityInOtherTable($specialityId)) {
-                flash("infoForm", $data['speciality']." ne peut pas se faire surpimer car une autre table contien cette spécialité");
+                flash("infoForm", $data['speciality']." cannot be deleted because another table contains this specialty");
                 redirect("../adminPanel.php");
             }
             
             if($this->specialityModel->delete($specialityId)){
-                flash("infoForm", "La spécialité ". $data['speciality'] ." a bien êtait suprimer", 'form-message form-message-green');
+                flash("infoForm", $data['speciality'] ." has been deleted !", 'form-message form-message-green');
                 redirect("../adminPanel.php");
             }else{
                 die("Something went wrong");
@@ -119,7 +124,7 @@
                 $init->delete();
                 break;
             default:
-                flash("infoForm", "Une erreur c'est produit !");
+                flash("infoForm", "An error occurred !");
                 redirect("../adminPanel.php");
         }
 

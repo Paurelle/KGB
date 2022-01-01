@@ -30,31 +30,31 @@ class Admins {
             redirect("../adminPanel.php");
         }
         
-        if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['name'])){
-            flash("infoForm", "Invalid Country");
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['name'])){
+            flash("infoForm", "Invalid name");
             redirect("../adminPanel.php");
         }
 
-        if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['lastname'])){
-            flash("infoForm", "Invalid Nationality");
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['lastname'])){
+            flash("infoForm", "Invalid lastname");
             redirect("../adminPanel.php");
         }
 
         if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
-            flash("infoForm", "Email invalide");
+            flash("infoForm", "Invalid email");
             redirect("../adminPanel.php");
         }
 
         if(strlen($data['password']) < 6){
-            flash("infoForm", "Mot de passe trop petit");
+            flash("infoForm", "Password too small");
             redirect("../adminPanel.php");
         } else if($data['password'] !== $data['confirmPassword']){
-            flash("infoForm", "Les mots de passe ne correspondent pas");
+            flash("infoForm", "Passwords do not match");
             redirect("../adminPanel.php");
         }
 
         if($this->adminModel->findAdminByEmail($data['email'])){
-            flash("infoForm", $data['email']." déjà pris");
+            flash("infoForm", $data['email']." already taken");
             redirect("../adminPanel.php");
         }
 
@@ -63,7 +63,7 @@ class Admins {
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
         if($this->adminModel->register($data)){
-            flash("infoForm", "L'admin ". $data['name'] ." a bien êtait créé !", 'form-message form-message-green');
+            flash("infoForm", $data['name'] ." has been created !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -85,31 +85,31 @@ class Admins {
         ];
 
         if (empty($data['name']) || empty($data['lastname']) || empty($data['email'])) {
-            flash("infoForm", "Une erreur c'est produit !");
+            flash("infoForm", "An error occurred!");
             redirect("../adminPanel.php");
         }
 
-        if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['name'])){
-            flash("infoForm", "Invalid Country");
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['name'])){
+            flash("infoForm", "Invalid name");
             redirect("../adminPanel.php");
         }
 
-        if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['lastname'])){
-            flash("infoForm", "Invalid Nationality");
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['lastname'])){
+            flash("infoForm", "Invalid lastname");
             redirect("../adminPanel.php");
         }
 
         if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
-            flash("infoForm", "Email invalide");
+            flash("infoForm", "Invalid email");
             redirect("../adminPanel.php");
         }
 
         if (!empty($data['password']) || !empty($data['confirmPassword'])) {
             if(strlen($data['password']) < 6){
-                flash("infoForm", "Mot de passe trop petit");
+                flash("infoForm", "Password too small");
                 redirect("../adminPanel.php");
             } else if($data['password'] !== $data['confirmPassword']){
-                flash("infoForm", "Les mots de passe ne correspondent pas");
+                flash("infoForm", "Passwords do not match");
                 redirect("../adminPanel.php");
             }
             //Passed all validation checks.
@@ -128,7 +128,7 @@ class Admins {
             if ($adminId == $_SESSION['adminId']) {
                 $this->logout();
             }
-            flash("infoForm", "l'admin ".$data['name']." a bien etait modifier");
+            flash("infoForm", $data['name']." has been modified !" , 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -146,12 +146,12 @@ class Admins {
         ];
 
         if (empty($data['name'])) {
-            flash("infoForm", "Une erreur c'est produit !");
+            flash("infoForm", "An error occurred !");
             redirect("../adminPanel.php");
         }
 
         if ($data['name'] == "default") {
-            flash("infoForm", "vous ne pouvez pas suprimer la valeur par default");
+            flash("infoForm", "You cannot remove the default");
             redirect("../adminPanel.php");
         }
 
@@ -159,12 +159,12 @@ class Admins {
         $adminId = $adminInfo->{'id_admin'};
 
         if ($adminId == $_SESSION['adminId']) {
-            flash("infoForm", "Vous ne pouvez pas suprimer l'admin ". $data['name'] ." car vous ete conecter actuelement avec !");
+            flash("infoForm", "You cannot delete the admin ". $data['name'] ." because you are currently logged in with !");
             redirect("../adminPanel.php");
         }
         
         if($this->adminModel->delete($data)){
-            flash("infoForm", "L'admin ". $data['name'] ." a bien êtait suprimer", 'form-message form-message-green');
+            flash("infoForm", $data['name'] ." has been deleted !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -183,7 +183,7 @@ class Admins {
             ];
     
             if(empty($data['name']) || empty($data['lastname']) || empty($data['email']) || empty($data['password'])){
-                flash("login", "Veuillez remplir toutes les entrées");
+                flash("login", "Please complete all entries");
                 redirect("../adminPanel.php");
             }
     
@@ -196,12 +196,12 @@ class Admins {
                     $this->createAdminSession($loggedInAdmin);
                 }else{
                     
-                    flash("login", "Mot de passe incorrect");
+                    flash("login", "Incorrect password");
                     redirect("../login.php");
                     
                 }
             }else{
-                flash("login", "Aucun utilisateur trouvé");
+                flash("login", "No admin found");
                 redirect("../login.php");
             }
     }
@@ -240,7 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $init->loginAdmin();
             break;
         default:
-            flash("infoForm", "Une erreur c'est produit !");
+            flash("infoForm", "An error occurred !");
             redirect("../adminPanel.php");
     }
 } else {

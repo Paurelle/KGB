@@ -1,111 +1,155 @@
 
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 8888; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+  }
+  /* Contenu Modal/Boîte*/
+  .modal-content {
+  background-color: #fefefe;
+  margin: 10vh auto; 
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 6px;
+  width: 70%; 
+  height: 73vh;
+  overflow-y: scroll;
+  scrollbar-color: rebeccapurple green;
+  scrollbar-width: thin;
+  }
+  .formX {
+    display: none;
+  }
 
+  .btn-content {
+    display: flex;
+  }
 
+  .switch-btn {
+    cursor: pointer;
+    width: calc(100% / 3);
+    height: 30px;
+  }
 
-/* Boîte Popup */
-      /* Le Modal (l'arrière-plan) */
-      
-      .modal {
-        display: none; /* Masqué par défaut */
-        position: fixed; /* Rester dans la place */
-        z-index: 8888; /* S'asseoir en haut */
-        left: 0;
-        top: 0;
-        width: 100%; /* Largeur complète */
-        height: 100%; /* Hauteur complète */
-        overflow: auto; /* Activer défilement si nécessaire */
-        background-color: rgb(0,0,0); /* Couleur de plan */
-        background-color: rgba(0,0,0,0.4); /*  w/ opacité noir*/
-        }
-        /* Contenu Modal/Boîte*/
-        .modal-content {
-        background-color: #fefefe;
-        margin: 10vh auto; /* 15% d'en haut et centré */
-        padding: 20px;
-        border: 1px solid #888;
-        width: 60%; /* Pouvait être plus ou moins, dépend de la taille de l'écran  */
-        }
-        .formX {
-          display: none;
-        }
-        .switch-btn, .submit {
-          cursor: pointer;
-        }
+  .submit{
+    cursor: pointer;
+  }
 
-        .checkbox input{
-          width: auto;
-        }
-        @media (min-width: 1366px) {
-        .modal-content {
-        background-color: #fefefe;
-        margin: 10vh auto; /* 15% d'en haut et centré */
-        padding: 20px;
-        border: 1px solid #888;
-        width: 30%; /* Pouvait être plus ou moins, dépend de la taille de l'écran */
-        }
-        }
-        h2, p {
-        margin: 0 0 20px;
-        font-weight: 400;
-        color: #666;
-        }
-        span{
-        color: #666;
-        display:block;
-        padding:0 0 5px;
-        }
-        form {
-        padding: 25px;
-        margin: 25px;
-        box-shadow: 0 2px 5px #f5f5f5; 
-        background: #eee; 
-        }
-        input, textarea {
-        width: calc(100% - 18px);
-        padding: 8px;
-        margin-bottom: 20px;
-        border: 1px solid #1c87c9;
-        outline: none;
-        }
-        .contact-form button {
-        width: 100%;
-        padding: 10px;
-        border: none;
-        background: #1c87c9; 
-        font-size: 16px;
-        font-weight: 400;
-        color: #fff;
-        }
-        button:hover {
-        background: #2371a0;
-        }    
-        /* Le bouton Fermer */
-        .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-        }
-        button.button {
-        background:none;
-        border-top:none;
-        outline: none;
-        border-right:none;
-        border-left:none;
-        border-bottom:#02274a 1px solid;
-        padding:0 0 3px 0;
-        font-size:16px;
-        cursor:pointer;
-        }
-        button.button:hover {
-        border-bottom:#a99567 1px solid;
-        color:#a99567;
-        }
+  .switch-btn:hover {
+    color: white;
+    background: black;
+  }
+
+  .switch-btn .switch-btn-1 {
+    background: rgba(0, 128, 0, 0.1);
+  }
+
+  select {
+    margin-bottom: 20px;
+  }
+
+  .select {
+    display: grid;
+  }
+
+  .checkbox-content{
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    margin-bottom: 20px;
+  }
+  .checkbox{
+    width: auto;
+    padding:10px;
+    display: grid;
+  }
+
+  .contact-form .btn-list {
+    background: white;
+    color: black;
+    border: 1px solid black;
+    margin-bottom: 20px;
+  }
+  
+  h2, p {
+  margin: 0 0 25px;
+  font-weight: 400;
+  color: black;
+  text-decoration: underline;
+  }
+  span{
+  color: #666;
+  display:block;
+  padding:0 0 5px;
+  }
+  form {
+  padding: 25px;
+  box-shadow: 0 2px 5px #f5f5f5; 
+  background: #eee; 
+  }
+  input, textarea {
+  width: calc(100% - 18px);
+  padding: 8px;
+  margin-bottom: 20px;
+  border: 1px solid black;
+  outline: none;
+  resize : none;
+  }
+  .contact-form button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: #1c87c9; 
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  }
+  button:hover {
+  background: #2371a0;
+  }    
+  /* Le bouton Fermer */
+  .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+  }
+  button.button {
+  background:none;
+  border-top:none;
+  outline: none;
+  border-right:none;
+  border-left:none;
+  border-bottom:#02274a 1px solid;
+  padding:0 0 3px 0;
+  font-size:16px;
+  cursor:pointer;
+  }
+  button.button:hover {
+  border-bottom:#a99567 1px solid;
+  color:#a99567;
+  }
 
         
+@media (min-width: 1366px) {
+    .modal-content {
+    background-color: #fefefe;
+    margin: 10vh auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%; 
+    }
+  }

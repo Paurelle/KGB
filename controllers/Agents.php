@@ -31,13 +31,13 @@ class Agents {
             redirect("../adminPanel.php");
         }
 
-        if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['name'])){
-            flash("infoForm", "Invalid Country");
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['name'])){
+            flash("infoForm", "Invalid name");
             redirect("../adminPanel.php");
         }
 
-        if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['lastname'])){
-            flash("infoForm", "Invalid Nationality");
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['lastname'])){
+            flash("infoForm", "Invalid lastname");
             redirect("../adminPanel.php");
         }
 
@@ -52,12 +52,12 @@ class Agents {
         }
 
         if($this->agentModel->findAgentByCode($data['code'])){
-            flash("infoForm", $data['code']." déjà pris");
+            flash("infoForm", $data['code']." already taken");
             redirect("../adminPanel.php");
         }
 
         if($this->agentModel->register($data)){
-            flash("infoForm", "L'agent ". $data['name'] ." a bien êtait créé !", 'form-message form-message-green');
+            flash("infoForm", $data['name'] ." has been created !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -85,12 +85,12 @@ class Agents {
             redirect("../adminPanel.php");
         }
 
-        if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['name'])){
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['name'])){
             flash("infoForm", "Invalid name");
             redirect("../adminPanel.php");
         }
 
-        if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['lastname'])){
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['lastname'])){
             flash("infoForm", "Invalid lastName");
             redirect("../adminPanel.php");
         }
@@ -106,12 +106,12 @@ class Agents {
         }
 
         if ($data['agent'] == "default") {
-            flash("infoForm", "vous ne pouvez pas modifier la valeur par default");
+            flash("infoForm", "You cannot change the default");
             redirect("../adminPanel.php");
         }
 
         if($this->agentModel->modify($data)){
-            flash("infoForm", "L'agent ". $data['name'] ." a bien êtait modifier", 'form-message form-message-green');
+            flash("infoForm", $data['name'] ." has been modified !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -129,24 +129,24 @@ class Agents {
         ];
 
         if (empty($data['agent'])) {
-            flash("infoForm", "Une erreur c'est produit !");
+            flash("infoForm", "An error occurred !");
             redirect("../adminPanel.php");
         }
 
         if ($data['agent'] == "default") {
-            flash("infoForm", "vous ne pouvez pas suprimer la valeur par default");
+            flash("infoForm", "You cannot remove the default");
             redirect("../adminPanel.php");
         }
 
         $agentInfo = $this->agentModel->getSpecificAgent($data['agent']);
 
         if ($this->agentModel->findAgentInOtherTable($data['agent'])) {
-            flash("infoForm",$agentInfo->{'nom'}." ne peut pas se faire surpimer car une autre table contien cette agent");
+            flash("infoForm",$agentInfo->{'nom'}." cannot be deleted because another table contains this agent");
             redirect("../adminPanel.php");
         }
 
         if($this->agentModel->delete($data)){
-            flash("infoForm", "L'agent ". $agentInfo->{'nom'} ." a bien êtait suprimer", 'form-message form-message-green');
+            flash("infoForm", $agentInfo->{'nom'} ." has been deleted !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -170,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $init->delete();
             break;
         default:
-            flash("infoForm", "Une erreur c'est produit !");
+            flash("infoForm", "An error occurred!");
             redirect("../adminPanel.php");
     }
 

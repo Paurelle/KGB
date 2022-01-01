@@ -26,18 +26,18 @@ class Statutes {
             redirect("../adminPanel.php");
         }
         
-        if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['status'])){
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['status'])){
             flash("infoForm", "Invalid Status");
             redirect("../adminPanel.php");
         }
 
         if($this->statusModel->findStatusByName($data['status'])){
-            flash("infoForm", $data['status']." déjà pris");
+            flash("infoForm", $data['status']." already taken");
             redirect("../adminPanel.php");
         }
 
         if($this->statusModel->register($data)){
-            flash("infoForm", "La spécialité ". $data['status'] ." a bien êtait créé !", 'form-message form-message-green');
+            flash("infoForm", $data['status'] ." has been created !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -53,13 +53,24 @@ class Statutes {
             'statusModify' => trim($_POST['statusModify'])
         ];
 
+        // Validate inputs
+        if (empty($data['statusModify'])) {
+            flash("infoForm", "Please complete all entries");
+            redirect("../adminPanel.php");
+        }
+        
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['statusModify'])){
+            flash("infoForm", "Invalid Status");
+            redirect("../adminPanel.php");
+        }
+
         if ($data['status'] == "default") {
-            flash("infoForm", "vous ne pouvez pas modifier la valeur par default");
+            flash("infoForm", "You cannot change the default");
             redirect("../adminPanel.php");
         }
 
         if($this->statusModel->modify($data)){
-            flash("infoForm", "Le statut ". $data['status'] ." a bien êtait modifier", 'form-message form-message-green');
+            flash("infoForm", $data['status'] ." has been modified !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -77,7 +88,7 @@ class Statutes {
         ];
 
         if (empty($data['status'])) {
-            flash("infoForm", "Une erreur c'est produit !");
+            flash("infoForm", "An error occurred !");
             redirect("../adminPanel.php");
         }
 
@@ -85,12 +96,12 @@ class Statutes {
         $statusId = $specialityInfo->{'id_statut'};
 
         if ($this->statusModel->findStatusInOtherTable($statusId)) {
-            flash("infoForm", $data['status']." ne peut pas se faire surpimer car une autre table contien se statut");
+            flash("infoForm", $data['status']." cannot be deleted because another table contains its status");
             redirect("../adminPanel.php");
         }
         
         if($this->statusModel->delete($data['status'])){
-            flash("infoForm", "Le statut ". $data['status'] ." a bien êtait suprimer", 'form-message form-message-green');
+            flash("infoForm", $data['status'] ." has been deleted !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -113,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $init->delete();
             break;
         default:
-            flash("infoForm", "Une erreur c'est produit !");
+            flash("infoForm", "An error occurred !");
             redirect("../adminPanel.php");
     }
 }

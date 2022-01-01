@@ -45,12 +45,12 @@ class Stashs {
         }
 
         if($this->stashModel->findStashByCode($data['code'])){
-            flash("infoForm", $data['code']." déjà pris");
+            flash("infoForm", $data['code']." already taken");
             redirect("../adminPanel.php");
         }
 
         if($this->stashModel->register($data)){
-            flash("infoForm", "La planque ". $data['code'] ." a bien êtait créé !", 'form-message form-message-green');
+            flash("infoForm", $data['code'] ." has been created !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -92,12 +92,12 @@ class Stashs {
         }
 
         if ($data['stash'] == "default") {
-            flash("infoForm", "vous ne pouvez pas modifier la valeur par default");
+            flash("infoForm", "You cannot change the default");
             redirect("../adminPanel.php");
         }
 
         if($this->stashModel->modify($data)){
-            flash("infoForm", "La planque ". $data['code'] ." a bien êtait modifier", 'form-message form-message-green');
+            flash("infoForm", $data['code'] ." has been modified !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -115,7 +115,7 @@ class Stashs {
         ];
 
         if (empty($data['stash'])) {
-            flash("infoForm", "Une erreur c'est produit !");
+            flash("infoForm", "An error occurred !");
             redirect("../adminPanel.php");
         }
 
@@ -127,12 +127,12 @@ class Stashs {
         $stashInfo = $this->stashModel->getSpecificStash($data['stash']);
 
         if ($this->stashModel->findStashInOtherTable($data['stash'])) {
-            flash("infoForm",$stashInfo->{'nom'}." ne peut pas se faire surpimer car une autre table contien cette stash");
+            flash("infoForm",$stashInfo->{'nom'}." cannot be deleted because another table contains this stash");
             redirect("../adminPanel.php");
         }
 
         if($this->stashModel->delete($data)){
-            flash("infoForm", "La planque ". $stashInfo->{'nom'} ." a bien êtait suprimer", 'form-message form-message-green');
+            flash("infoForm", $stashInfo->{'nom'} ." has been deleted !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $init->delete();
             break;
         default:
-            flash("infoForm", "Une erreur c'est produit !");
+            flash("infoForm", "An error occurred !");
             redirect("../adminPanel.php");
     }
 

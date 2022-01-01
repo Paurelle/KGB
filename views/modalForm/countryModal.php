@@ -7,17 +7,18 @@
 ?>
 
                 <?php 
-                    $countrysDetails = $countrys->getAllCountries(); 
-                    //var_dump($countrysDetails);
+                    $countrysDetails = $countrys->getAllCountries();
                 ?>
                 <button class="grid-panel-items grid-panel-item2" data-modal="modal2">
                     Country
                 </button>
                 <div id="modal2" class="modal">
                     <div class="modal-content">
-                        <button class="switch-btn" style="background: green" onclick="addForm()">Add</button>
-                        <button class="switch-btn" style="background: yellow" onclick="modifyForm()">Modify</button>
-                        <button class="switch-btn" style="background: red" onclick="deleteForm()">Delete</button>
+                        <div class="btn-content">
+                            <button class="switch-btn" onclick="addForm()">Add</button>
+                            <button class="switch-btn" onclick="modifyForm()">Modify</button>
+                            <button class="switch-btn" onclick="deleteForm()">Delete</button>
+                        </div>
 
                         <div class="contact-form">
                             <a class="close">&times;</a>

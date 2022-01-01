@@ -12,7 +12,6 @@
                 <?php 
                     $contactDetails = $contact->getAllContacts(); 
                     $countryDetails = $country->getAllCountries(); 
-                    //var_dump($countrysDetails);
                 ?>
 
                 <button class="grid-panel-items grid-panel-item3"  data-modal="modal3">
@@ -20,9 +19,11 @@
                 </button>
                 <div id="modal3" class="modal">
                     <div class="modal-content">
-                        <button class="switch-btn" style="background: green" onclick="addForm()">Add</button>
-                        <button class="switch-btn" style="background: yellow" onclick="modifyForm()">Modify</button>
-                        <button class="switch-btn" style="background: red" onclick="deleteForm()">Delete</button>
+                        <div class="btn-content">
+                            <button class="switch-btn" onclick="addForm()">Add</button>
+                            <button class="switch-btn" onclick="modifyForm()">Modify</button>
+                            <button class="switch-btn" onclick="deleteForm()">Delete</button>
+                        </div>
 
                         <div class="contact-form">
                         <a class="close">&times;</a>
@@ -40,7 +41,7 @@
                                 <label for="addBirthDateContact">Birth date</label>
                                 <input type="date" name="addBirthDateContact" id="addBirthDateContact">
 
-                                <label for="addCountryContact">Country</label>
+                                <label class="select" for="addCountryContact">Country</label>
                                 <select name="addCountryContact" id="addCountryContact">
                                     <option value="default"></option>
                                     <?php 
@@ -55,7 +56,7 @@
                                 <label for="addCodeContact">Nom de code</label>
                                 <input type="text" name="addCodeContact" id="addCodeContact">
                             </div>
-                            <button type="submit">Envoyer</button>
+                            <button type="submit" class="submit">Envoyer</button>
                         </form>
                         <!-- form -->
                         <script src="views/js/modifyModal/contactModifyForm.js"></script>
@@ -85,7 +86,7 @@
                                     <label for="modifyBirthDateContact">Birth date</label>
                                     <input type="date" name="modifyBirthDateContact" id="modifyBirthDateContact">
 
-                                    <label for="modifyCountryContact">Country</label>
+                                    <label class="select" for="modifyCountryContact">Country</label>
                                     <select name="modifyCountryContact" id="modifyCountryContact">
                                         <?php 
                                         foreach ($countryDetails as $countryDetail) {
@@ -99,7 +100,7 @@
                                     <label for="modifyCodeContact">Nom de code</label>
                                     <input type="text" name="modifyCodeContact" id="modifyCodeContact">
 
-                                    <button type="submit">Envoyer</button>
+                                    <button type="submit" class="submit">Envoyer</button>
 
                                 </div>
                             </div>
@@ -120,7 +121,7 @@
                                     ?>
                                 </select>
                             </div><br>
-                            <button type="submit" href="adminPanel.php">Envoyer</button>
+                            <button type="submit" class="submit">Envoyer</button>
                         </form>
                         </div>
                     </div>

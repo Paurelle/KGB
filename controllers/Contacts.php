@@ -30,13 +30,13 @@ class Contacts {
             redirect("../adminPanel.php");
         }
 
-        if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['name'])){
-            flash("infoForm", "Invalid Country");
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['name'])){
+            flash("infoForm", "Invalid name");
             redirect("../adminPanel.php");
         }
 
-        if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['lastname'])){
-            flash("infoForm", "Invalid Nationality");
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['lastname'])){
+            flash("infoForm", "Invalid lastname");
             redirect("../adminPanel.php");
         }
 
@@ -46,12 +46,12 @@ class Contacts {
         }
 
         if($this->contactModel->findContactByCodeName($data['codeName'])){
-            flash("infoForm", $data['codeName']." déjà pris");
+            flash("infoForm", $data['codeName']." already taken");
             redirect("../adminPanel.php");
         }
 
         if($this->contactModel->register($data)){
-            flash("infoForm", "Le contact ". $data['name'] ." a bien êtait créé !", 'form-message form-message-green');
+            flash("infoForm", $data['name'] ." has been created !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -78,12 +78,12 @@ class Contacts {
             redirect("../adminPanel.php");
         }
 
-        if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['name'])){
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['name'])){
             flash("infoForm", "Invalid name");
             redirect("../adminPanel.php");
         }
 
-        if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['lastname'])){
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['lastname'])){
             flash("infoForm", "Invalid lastName");
             redirect("../adminPanel.php");
         }
@@ -94,12 +94,12 @@ class Contacts {
         }
 
         if ($data['contact'] == "default") {
-            flash("infoForm", "vous ne pouvez pas modifier la valeur par default");
+            flash("infoForm", "You cannot change the default");
             redirect("../adminPanel.php");
         }
 
         if($this->contactModel->modify($data)){
-            flash("infoForm", "Le contact ". $data['name'] ." a bien êtait modifier", 'form-message form-message-green');
+            flash("infoForm", $data['name'] ." has been modified !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -117,24 +117,24 @@ class Contacts {
         ];
 
         if (empty($data['contact'])) {
-            flash("infoForm", "Une erreur c'est produit !");
+            flash("infoForm", "An error occurred !");
             redirect("../adminPanel.php");
         }
 
         if ($data['contact'] == "default") {
-            flash("infoForm", "vous ne pouvez pas suprimer la valeur par default");
+            flash("infoForm", "You cannot remove the default");
             redirect("../adminPanel.php");
         }
 
         $contactInfo = $this->contactModel->getSpecificContact($data['contact']);
 
         if ($this->contactModel->findContactInOtherTable($data['contact'])) {
-            flash("infoForm",$contactInfo->{'nom'}." ne peut pas se faire surpimer car une autre table contien cette contact");
+            flash("infoForm",$contactInfo->{'nom'}." Cannot be deleted because another table contains this contact");
             redirect("../adminPanel.php");
         }
 
         if($this->contactModel->delete($data)){
-            flash("infoForm", "Le contact ". $contactInfo->{'nom'} ." a bien êtait suprimer", 'form-message form-message-green');
+            flash("infoForm", $contactInfo->{'nom'} ." has been deleted !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $init->delete();
             break;
         default:
-            flash("infoForm", "Une erreur c'est produit !");
+            flash("infoForm", "An error occurred!");
             redirect("../adminPanel.php");
     }
 

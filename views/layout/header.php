@@ -6,7 +6,7 @@
 
 <header id="header">
     <div class="row">
-        <a href="<?php echo $linkLogo ?>"><img class="logo" src="views/img/logo.png" alt=""></a>
+        <a href="<?php echo $linkLogo ?>"><img class="logo" src="views/img/logo.png" alt="image og KGB"></a>
         <nav id="nav" class="nav">
             <button id="btn-mobile" class="btn-mobile" aria-label="Open Menu" aria-haspopup="true" aria-controls="menu" aria-expanded="false">
                 <span class="hamburger"></span>

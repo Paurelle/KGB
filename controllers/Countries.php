@@ -27,23 +27,23 @@ class Countries {
             redirect("../adminPanel.php");
         }
         
-        if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['country'])){
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['country'])){
             flash("infoForm", "Invalid Country");
             redirect("../adminPanel.php");
         }
 
-        if(!preg_match("/^[a-zA-Zéèçàê]*$/", $data['nationality'])){
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['nationality'])){
             flash("infoForm", "Invalid Nationality");
             redirect("../adminPanel.php");
         }
 
         if($this->countryModel->findCountryByName($data['country'])){
-            flash("infoForm", $data['country']." déjà pris");
+            flash("infoForm", $data['country']." already taken");
             redirect("../adminPanel.php");
         }
 
         if($this->countryModel->register($data)){
-            flash("infoForm", "Le pays ". $data['country'] ." a bien êtait créé !", 'form-message form-message-green');
+            flash("infoForm", $data['country'] ." has been created !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -61,18 +61,29 @@ class Countries {
             'nationalityModify' => trim($_POST['nationalityModify'])
         ];
         
-        if (empty($data['country'])) {
-            flash("infoForm", "Une erreur c'est produit !");
+        // Validate inputs
+        if (empty($data['countryModify']) || empty($data['nationalityModify'])) {
+            flash("infoForm", "Please complete all entries");
+            redirect("../adminPanel.php");
+        }
+
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['countryModify'])){
+            flash("infoForm", "Invalid Country");
+            redirect("../adminPanel.php");
+        }
+
+        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['nationalityModify'])){
+            flash("infoForm", "Invalid Nationality");
             redirect("../adminPanel.php");
         }
 
         if ($data['country'] == "default") {
-            flash("infoForm", "vous ne pouvez pas modifier la valeur par default");
+            flash("infoForm", "You cannot change the default");
             redirect("../adminPanel.php");
         }
 
         if($this->countryModel->modify($data)){
-            flash("infoForm", "Le pays ". $data['country'] ." a bien êtait modifier", 'form-message form-message-green');
+            flash("infoForm", $data['country'] ." has been modified !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -90,7 +101,7 @@ class Countries {
         ];
 
         if (empty($data['country'])) {
-            flash("infoForm", "Une erreur c'est produit !");
+            flash("infoForm", "An error occurred !");
             redirect("../adminPanel.php");
         }
         
@@ -98,12 +109,12 @@ class Countries {
         $countryId = $countryInfo->{'id_pays'};
 
         if ($this->countryModel->findCountryInOtherTable($countryId)) {
-            flash("infoForm", $data['country']." ne peut pas se faire surpimer car une autre table contien se pays");
+            flash("infoForm", $data['country']." cannot be deleted because another table contains its country");
             redirect("../adminPanel.php");
         }
 
         if($this->countryModel->delete($data)){
-            flash("infoForm", "Le pays ". $data['country'] ." a bien êtait suprimer", 'form-message form-message-green');
+            flash("infoForm", $data['country'] ." has been deleted !", 'form-message form-message-green');
             redirect("../adminPanel.php");
         }else{
             die("Something went wrong");
@@ -127,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $init->delete();
             break;
         default:
-            flash("infoForm", "Une erreur c'est produit !");
+            flash("infoForm", "An error occurred !");
             redirect("../adminPanel.php");
     }
 
