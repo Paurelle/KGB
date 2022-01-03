@@ -96,6 +96,11 @@ class Missions {
             redirect("../adminPanel.php");
         }
 
+        if ($this->missionModel->agenttestAgentMission($data)) {
+            flash("infoForm", "There must be at least 1 agent with the specialty of the mission");
+            redirect("../adminPanel.php");
+        }
+
         if($this->missionModel->register($data)){
             flash("infoForm", $data['title'] ." has been created !", 'form-message form-message-green');
             redirect("../adminPanel.php");

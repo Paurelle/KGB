@@ -1,0 +1,1 @@
+Petit projet "kgb" qui a pour but les liaisons utilisateur(l'admin) aux base de donnée.

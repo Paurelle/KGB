@@ -80,9 +80,13 @@ class Admins {
             'name' => trim($_POST['nameModify']),
             'lastname' => trim($_POST['lastnameModify']),
             'email' => trim($_POST['emailModify']),
+            'laseEmail' => '',
             'password' => trim($_POST['pwdModify']),
             'confirmPassword' => trim($_POST['cPwdModify'])
         ];
+
+        $adminInfo = $this->adminModel->getSpecificAdmin($data['Admin']);
+        $data['laseEmail'] = $adminInfo->{"email"};
 
         if (empty($data['name']) || empty($data['lastname']) || empty($data['email'])) {
             flash("infoForm", "An error occurred!");
@@ -116,8 +120,8 @@ class Admins {
             //Now going to hash password
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
         } else {
-            $adminInfo = $this->adminModel->getSpecificAdmin($data['name']);
-            $data['password'] = $adminInfo->{'mdp'};
+            $adminInfo = $this->adminModel->getSpecificAdmin($data['Admin']);
+            $data['password'] = $adminInfo->{"mdp"};
             
         }
 

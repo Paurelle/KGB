@@ -30,7 +30,7 @@ class Contacts {
             redirect("../adminPanel.php");
         }
 
-        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['name'])){
+        if(!preg_match("/^[a-zA-Zéèçàêâä ]*$/", $data['name'])){
             flash("infoForm", "Invalid name");
             redirect("../adminPanel.php");
         }
@@ -78,7 +78,7 @@ class Contacts {
             redirect("../adminPanel.php");
         }
 
-        if(!preg_match("/^[a-zA-Zéèçàê ]*$/", $data['name'])){
+        if(!preg_match("/^[a-zA-Zéèçàêâä ]*$/", $data['name'])){
             flash("infoForm", "Invalid name");
             redirect("../adminPanel.php");
         }

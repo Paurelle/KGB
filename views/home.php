@@ -71,8 +71,19 @@
                         <div class="content">
                             <p>Code name : <?= $missionDetail->titre; ?></p>
                             <p>Status : <?= $mission->getdetailsMission($missionDetail->id_mission)->statut;?></p>
-                            <?php $chaine = $missionDetail->description; ?>
-                            <p><?= tronque_chaine($chaine, 200) ?></p>
+                            <?php 
+                            if (strlen($missionDetail->description) >= 200) {
+                            ?>
+                                <p><?= tronque_chaine($missionDetail->description, 200) ?></p>
+                            <?php      
+                            } else {
+                            ?>
+                                <p><?= $missionDetail->description ?></p>
+                            <?php  
+                            }
+                            ?>
+                                
+                            
                         </div>
                         <div class="btn-modal">
                             <button class="mission-detail-modal" data-modal="modal-<?=$compteur?>">
